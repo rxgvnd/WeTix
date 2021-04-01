@@ -11,6 +11,14 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <!-- Customize your theme here.
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+        <item name="colorAccent">@color/colorAccent</item>-->
     </style>
+    <!--<style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+       <item name="colorPrimary">@color/purple_500</item>
+       <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+       <item name="colorAccent">@color/colorAccent</item>
+   </style>-->
 </resources>

@@ -24,86 +24,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textSize="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="40dp"/>
+        android:orientation="vertical"
+        android:gravity="center">
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/Name"
-            android:layout_marginTop="10dp"
+            android:id="@+id/txUsernameReg"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:hint="Input Name"/>
+            android:hint="Username"
+            android:inputType="textPersonName"/>
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Userame"
-            android:textSize="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/Username"
-            android:layout_marginTop="10dp"
+            android:id="@+id/txPasswordReg"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:hint="Input Username"/>
+            android:hint="Password"
+            android:inputType="textPassword"/>
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email"
-            android:textSize="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/Email"
-            android:layout_marginTop="10dp"
+            android:id="@+id/txConPassword"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:hint="Input Email"/>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Password"
-            android:textSize="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/Password"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:hint="Input Password"/>
-
+            android:hint="Confirm Password"
+            android:inputType="textPassword"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Register"
-            android:id="@+id/pressRegis"
+            android:id="@+id/btnRegister"
             android:layout_marginLeft="90dp"
             android:layout_marginRight="90dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            style="@style/Widget.AppCompat.Button.Colored"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvRegister"
+            android:text="Back To Login"/>
     </LinearLayout>
 </LinearLayout>
