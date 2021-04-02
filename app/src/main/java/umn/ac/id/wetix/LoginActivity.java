@@ -19,9 +19,9 @@ import static android.text.Html.fromHtml;
 
 public class LoginActivity extends AppCompatActivity {
 
-    /*EditText TxUsername, TxPassword;
+    EditText TxUsername, TxPassword;
     Button BtnLogin;
-    DBHelper dbHelper;*/
+    DBHelper dbHelper;
 
     private LinearLayout LoginAct;
     private Button pressLogin;
@@ -33,35 +33,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Username = findViewById(R.id.txUsername);
-        Password = findViewById(R.id.txPassword);
-        pressLogin = findViewById(R.id.btnLogin);
 
-        pressLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(TextUtils.isEmpty(Username.getText().toString()) || TextUtils.isEmpty(Password.getText().toString())) {
-                    Toast.makeText(LoginActivity.this, "Empty Data!", Toast.LENGTH_LONG).show();
-                }else if(Username.getText().toString().equals(Correct_Username)){
-                    if (Password.getText().toString().equals(Correct_Pass)){
-                        Toast.makeText(LoginActivity.this, "Selamat Datang!", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(LoginActivity.this, Dashboard.class);
-                        startActivity(intent);
-                    }else{
-                        Toast.makeText(LoginActivity.this, "Invalid Username or Password!", Toast.LENGTH_LONG).show();
-                    }
-                }else {
-                    Toast.makeText(LoginActivity.this, "Invalid Username or Password!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-        /*TxUsername = (EditText)findViewById(R.id.txUsername);
-        TxPassword = (EditText)findViewById(R.id.txPassword);
-        BtnLogin = (Button)findViewById(R.id.btnLogin);
+        TxUsername = findViewById(R.id.txUsername);
+        TxPassword = findViewById(R.id.txPassword);
+        BtnLogin = findViewById(R.id.btnLogin);
 
         dbHelper = new DBHelper(this);
 
-        TextView tvCreateAccount = (TextView)findViewById(R.id.tvCreateAccount);
+        TextView tvCreateAccount = findViewById(R.id.tvCreateAccount);
         tvCreateAccount.setText(fromHtml("I don't have account yet. " + "</font><font color='#3b5998'>create one</font>"));
 
         tvCreateAccount.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = TxPassword.getText().toString().trim();
 
                 Boolean res = dbHelper.checkUser(username, password);
-                if (res == true){
+                if (res){
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, Dashboard.class));
                 } else {
@@ -93,6 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             }else {
                 result = Html.fromHtml(html);
             }
-            return result;*/
+            return result;
     }
 }

@@ -1,15 +1,15 @@
 package umn.ac.id.wetix;
 
-/*import android.content.ContentValues;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;*/
+import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-/*public class DBHelper extends SQLiteOpenHelper {
-    /*public static final String database_name = "db_login";
+public class DBHelper extends SQLiteOpenHelper {
+    public static final String database_name = "db_login";
     public static final String table_name = "table_login";
     public static final String row_id = "_id";
     public static final String row_username = "Username";
@@ -23,13 +23,13 @@ import androidx.annotation.Nullable;
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+    public void onCreate(SQLiteDatabase db) {
         String query = " CREATE TABLE " + table_name +"(" + row_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + row_username + " TEXT," + row_password + " TEXT)";
         db.execSQL(query);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + table_name);
     }
     //insert Data
@@ -52,4 +52,3 @@ import androidx.annotation.Nullable;
             return false;
     }
 }
-        */

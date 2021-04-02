@@ -18,22 +18,22 @@ import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    /*EditText TxUsername, TxPassword, TxConPassword;
+    EditText TxUsername, TxPassword, TxConPassword;
     Button BtnRegister;
-    DBHelper dbHelper;*/
+    DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        /*dbHelper = new DBHelper(this);
+        dbHelper = new DBHelper(this);
 
-        TxUsername = (EditText)findViewById(R.id.txUsernameReg);
-        TxPassword = (EditText)findViewById(R.id.txPasswordReg);
-        TxConPassword = (EditText)findViewById(R.id.txConPassword);
-        BtnRegister = (Button)findViewById(R.id.btnRegister);
+        TxUsername = findViewById(R.id.txUsernameReg);
+        TxPassword = findViewById(R.id.txPasswordReg);
+        TxConPassword = findViewById(R.id.txConPassword);
+        BtnRegister = findViewById(R.id.btnRegister);
 
-        TextView tvRegister = (TextView)findViewById(R.id.tvRegister);
+        TextView tvRegister = findViewById(R.id.tvRegister);
 
         tvRegister.setText(fromHtml("Back to " +  "</font><font color='#3b5998'>Login</font>"));
 
@@ -74,6 +74,6 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             result = Html.fromHtml(html);
         }
-        return result;*/
+        return result;
     }
 }
