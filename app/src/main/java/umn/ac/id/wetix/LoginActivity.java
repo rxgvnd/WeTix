@@ -23,12 +23,6 @@ public class LoginActivity extends AppCompatActivity {
     Button BtnLogin;
     DBHelper dbHelper;
 
-    private LinearLayout LoginAct;
-    private Button pressLogin;
-    EditText Username, Password;
-    String Correct_Username = "uasmobile";
-    String Correct_Pass = "uasmobilegenap";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = TxPassword.getText().toString().trim();
 
                 Boolean res = dbHelper.checkUser(username, password);
-                if (res){
+                if (res == true){
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, Dashboard.class));
                 } else {

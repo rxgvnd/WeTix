@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText TxUsername, TxPassword, TxConPassword;
+    EditText TxUsername, TxEmail, TxPassword, TxConPassword;
     Button BtnRegister;
     DBHelper dbHelper;
     @Override
@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 
         TxUsername = findViewById(R.id.txUsernameReg);
+        TxEmail = findViewById(R.id.txEmailReg);
         TxPassword = findViewById(R.id.txPasswordReg);
         TxConPassword = findViewById(R.id.txConPassword);
         BtnRegister = findViewById(R.id.btnRegister);
@@ -47,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String username = TxUsername.getText().toString().trim();
+                String email = TxEmail.getText().toString().trim();
                 String password = TxPassword.getText().toString().trim();
                 String conPassword = TxConPassword.getText().toString().trim();
 
@@ -59,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }else {
                     values.put(DBHelper.row_username, username);
                     values.put(DBHelper.row_password, password);
+                    values.put(DBHelper.row_email, email);
                     dbHelper.insertData(values);
 
                     Toast.makeText(RegisterActivity.this, "Register successful", Toast.LENGTH_SHORT).show();
