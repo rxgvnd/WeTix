@@ -21,44 +21,59 @@
             android:textColor="@color/white"
             android:layout_marginLeft="30dp"/>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/txUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txUsername"
-            android:layout_marginTop="50dp"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="30dp"
             android:hint="Input Username"
-            android:inputType="textPersonName"/>
+            android:textColor="@color/black"
+            android:inputType="textPersonName" />
 
         <EditText
+            android:id="@+id/txPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txPassword"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
             android:hint="Input Password"
-            android:inputType="textPassword"/>
-        <Button
+            android:textColor="@color/black"
+            android:inputType="textPassword" />
+
+        <LinearLayout
+            android:id="@+id/ll_Login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:id="@+id/btnLogin"
-            android:layout_marginLeft="90dp"
-            android:layout_marginRight="90dp"
-            android:layout_marginTop="25dp"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_gravity="center_horizontal">
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/buttonstyle"
+                android:textStyle="bold"
+                android:text="Login" />
+        </LinearLayout>
+
         <TextView
+            android:id="@+id/tvCreateAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvCreateAccount"
-            android:text="Create Account Click Here"
-            android:layout_marginLeft="90dp"/>
+            android:layout_marginLeft="90dp"
+            android:textColor="@color/black"
+            android:text="Create Account Click Here" />
     </LinearLayout>
 </LinearLayout>

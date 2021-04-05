@@ -37,9 +37,9 @@
                 app:civ_border_color="#81dafc"
                 app:civ_border_width="6dp"
                 app:civ_shadow="true"
-                app:civ_shadow_color="#000000"
-                app:civ_shadow_radius="10"
-                android:src="@drawable/profile_picture"/>
+                app:civ_shadow_color="#000000"/>
+<!--                app:civ_shadow_radius="10"-->
+<!--                android:src="@drawable/profile_picture"/>-->
             <TextView
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center_horizontal"
