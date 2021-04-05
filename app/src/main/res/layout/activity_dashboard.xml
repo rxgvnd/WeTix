@@ -4,10 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Dashboard">
+    tools:context=".Dashboard"
+    android:background="@color/cream2">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dashboard"
-        android:textSize="50dp"/>
+        android:layout_marginTop="5dp"
+        android:text="We Tix"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:textAlignment="center"/>
 </LinearLayout>

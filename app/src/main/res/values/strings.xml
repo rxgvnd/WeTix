@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeTix</string>
+    <string name="topup">Top Up</string>
+    <string name="logout">Logout</string>
 </resources>
