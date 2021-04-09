@@ -7,6 +7,10 @@
     tools:context=".Dashboard"
     android:background="@color/cream2">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+    
     <FrameLayout
         android:id="@+id/fl_container"
         android:layout_width="match_parent"

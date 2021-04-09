@@ -53,7 +53,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //insert Data
     public void insertData(ContentValues values) {
-        db.insert(table_users, null, values);
+        db.insert(table_users, "0", values);
     }
 
     public boolean checkUser(String username, String password) {
