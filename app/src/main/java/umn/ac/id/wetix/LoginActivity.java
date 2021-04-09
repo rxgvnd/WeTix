@@ -31,8 +31,20 @@ public class LoginActivity extends AppCompatActivity {
         TxUsername = findViewById(R.id.txUsername);
         TxPassword = findViewById(R.id.txPassword);
         BtnLogin = findViewById(R.id.btnLogin);
-
         dbHelper = new DBHelper(this);
+        SharedPrefManager sharedPrefManager;
+        sharedPrefManager = new SharedPrefManager(this);
+
+        if (sharedPrefManager.getSPSudahLogin()){
+            String toastMessage = "Already Logged In, Redirecting . . .";
+            Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+            Intent hvLoggedIN = new Intent(LoginActivity.this, Dashboard.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            hvLoggedIN.putExtra("FROM_ACTIVITY", "login");
+            startActivity(hvLoggedIN);
+            finish();
+        }
+
 
         TextView tvCreateAccount = findViewById(R.id.tvCreateAccount);
         tvCreateAccount.setText(fromHtml("I don't have account yet. " + "</font><font color='#3b5998'>create one</font>"));
@@ -51,6 +63,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 Boolean res = dbHelper.checkUser(username, password);
                 if (res == true){
+                    sharedPrefManager.saveSPString(SharedPrefManager.SP_ID, username);
+                    // Shared Pref ini berfungsi untuk menjadi trigger session login
+                    sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, Dashboard.class));
                 } else {

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -42,7 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query = " CREATE TABLE " + tUsers +"(" + row_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + row_username + " TEXT, " + row_email + " TEXT," + row_name + " TEXT," + row_password + " TEXT, " + row_photo + " BLOB, " + row_bday + " DATE, " + row_balance + " DOUBLE(7,2))";
         db.execSQL(query);
-        query = " CREATE TABLE " + tTickets +"(" + row_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + row_movName + " TEXT," + row_movTime + " TEXT, " + row_movPrice + " TEXT, " + row_seat + " TEXT)";
+        query = " CREATE TABLE " + tTickets +"(" + row_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + row_movName + " TEXT unique," + row_movTime + " TEXT, " + row_movPrice + " TEXT, " + row_seat + " TEXT)";
         db.execSQL(query);
     }
 
@@ -56,6 +57,19 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(table_users, "0", values);
     }
 
+    public String getRow_id(String id){
+        String idU, query;
+        query = "SELECT _id FROM "+tUsers+" WHERE "+ row_username+" =?";
+        Cursor cursor=db.rawQuery(query,new String[]{id});
+        cursor.moveToFirst();
+        idU = cursor.getString(cursor.getColumnIndex(row_id));
+        return idU;
+    }
+    public Boolean updateData(ContentValues values, String id){
+        String idU = getRow_id(id);
+        db.update(tUsers, values, "_id = ?", new String[]{idU});
+        return true;
+    }
     public boolean checkUser(String username, String password) {
         String[] columns = {row_id};
         SQLiteDatabase db = getReadableDatabase();
@@ -72,11 +86,21 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
     }
 
-    public Cursor fetchProfile() {
-        Cursor cursor = this.db.query("users", new String[]{row_id, row_photo, row_balance, row_name, row_email, row_bday}, null, null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-        return cursor;
+    public User getUser(String id){
+        SQLiteDatabase db = getReadableDatabase();
+        String query="SELECT * FROM "+tUsers+" WHERE "+ row_username+" =?";
+        Cursor cursor=db.rawQuery(query,new String[]{id});
+        cursor.moveToFirst();
+
+        User user = new User();
+        user.setName (cursor.getString(cursor.getColumnIndex(row_name)));
+        user.setBalance (cursor.getInt(cursor.getColumnIndex(row_balance)));
+        user.setBday (cursor.getString(cursor.getColumnIndex(row_bday)));
+        user.setEmail (cursor.getString(cursor.getColumnIndex(row_email)));
+        user.setImage (cursor.getBlob(cursor.getColumnIndex(row_photo)));
+
+        cursor.close();
+
+        return user;
     }
 }
