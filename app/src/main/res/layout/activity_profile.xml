@@ -20,75 +20,83 @@
             android:textColor="@color/white"
             android:textAlignment="center"/>
     </LinearLayout>
-    <LinearLayout
+    <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp">
+-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="280dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_height="200dp"
-                android:layout_width="200dp"
-                android:id="@+id/profpic"/>
+                android:id="@+id/profpic"
+                android:layout_width="190dp"
+                android:layout_height="190dp" />
+
             <TextView
                 android:id="@+id/txBalance"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
                 android:text="Saldo : ....."
                 android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
-    </LinearLayout>
+    <!-- </LinearLayout>-->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="359dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/txName"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:hint="Nama"/>
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:hint="Nama" />
+
+        <EditText
             android:id="@+id/txEmail"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:hint="Email"/>
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:hint="Email" />
+
+        <EditText
             android:id="@+id/txBirthday"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:hint="Birthday"/>
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txChangePass"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
-            android:hint="Ini buat ganti password"/>
+            android:hint="Birthday" />
+
+        <EditText
+            android:id="@+id/txChangePass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:hint="Ini buat ganti password" />
 
         <Button
+            android:id="@+id/saveProf"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="36dp"
             android:layout_gravity="right"
             android:layout_marginRight="40dp"
-            android:id="@+id/saveProf"/>
+            android:text="Save" />
     </LinearLayout>
 </LinearLayout>
