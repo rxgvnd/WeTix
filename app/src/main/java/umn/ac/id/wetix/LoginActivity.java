@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText TxUsername, TxPassword;
     Button BtnLogin;
-    DBHelper dbHelper;
+//    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         TxUsername = findViewById(R.id.txUsername);
         TxPassword = findViewById(R.id.txPassword);
         BtnLogin = findViewById(R.id.btnLogin);
-        dbHelper = new DBHelper(this);
+//        dbHelper = new DBHelper(this);
         SharedPrefManager sharedPrefManager;
         sharedPrefManager = new SharedPrefManager(this);
 
@@ -55,24 +55,24 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
-        BtnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = TxUsername.getText().toString().trim();
-                String password = TxPassword.getText().toString().trim();
-
-                Boolean res = dbHelper.checkUser(username, password);
-                if (res == true){
-                    sharedPrefManager.saveSPString(SharedPrefManager.SP_ID, username);
-                    // Shared Pref ini berfungsi untuk menjadi trigger session login
-                    sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
-                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, Dashboard.class));
-                } else {
-                    Toast.makeText( LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//        BtnLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String username = TxUsername.getText().toString().trim();
+//                String password = TxPassword.getText().toString().trim();
+//
+////                Boolean res = dbHelper.checkUser(username, password);
+//                if (res == true){
+//                    sharedPrefManager.saveSPString(SharedPrefManager.SP_ID, username);
+//                    // Shared Pref ini berfungsi untuk menjadi trigger session login
+//                    sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
+//                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(LoginActivity.this, Dashboard.class));
+//                } else {
+//                    Toast.makeText( LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
     }
     public static Spanned fromHtml(String html) {
             Spanned result;

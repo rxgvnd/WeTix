@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "424983174607",
+    "project_id": "wetix-4997c",
+    "storage_bucket": "wetix-4997c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424983174607:android:423d06dac518f6a4b206ba",
+        "android_client_info": {
+          "package_name": "umn.ac.id.wetix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424983174607-ur32sglrpgmk02gtq5v3gchol752t1tl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXpH1-m0AEqtJSDrOo9cf5aGoZR8CmjHo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424983174607-ur32sglrpgmk02gtq5v3gchol752t1tl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

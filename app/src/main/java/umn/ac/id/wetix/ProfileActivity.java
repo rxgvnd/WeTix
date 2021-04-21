@@ -17,7 +17,7 @@ import java.text.ParseException;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    DBHelper dbHelper;
+//    DBHelper dbHelper;
     EditText name, email, bday;
     TextView balance;
     ImageView profpic;
@@ -31,8 +31,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         sharedPrefManager = new SharedPrefManager(ProfileActivity.this);
 
-        dbHelper = new DBHelper(this);
-        user = dbHelper.getUser(sharedPrefManager.getID());
+//        dbHelper = new DBHelper(this);
+//        user = dbHelper.getUser(sharedPrefManager.getID());
         profpic = findViewById(R.id.profpic);
         balance = findViewById(R.id.txBalance);
         balance.setText(String.format("Saldo : %s", user.getBalance()));
@@ -45,22 +45,22 @@ public class ProfileActivity extends AppCompatActivity {
         //name = findViewById(R.id.txName);
 
         saveProfile = findViewById(R.id.saveProf);
-        saveProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ContentValues values = new ContentValues();
-                String etName = name.getText().toString().trim();
-                String etEmail = email.getText().toString().trim();
-                String etBday = bday.getText().toString().trim();
-
-                values.put(DBHelper.row_name, etName);
-                values.put(DBHelper.row_email, etEmail);
-                values.put(DBHelper.row_bday, etBday);
-                if(dbHelper.updateData(values, sharedPrefManager.getID()) == true){
-                    Toast.makeText(ProfileActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//        saveProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ContentValues values = new ContentValues();
+//                String etName = name.getText().toString().trim();
+//                String etEmail = email.getText().toString().trim();
+//                String etBday = bday.getText().toString().trim();
+//
+//                values.put(DBHelper.row_name, etName);
+//                values.put(DBHelper.row_email, etEmail);
+//                values.put(DBHelper.row_bday, etBday);
+//                if(dbHelper.updateData(values, sharedPrefManager.getID()) == true){
+//                    Toast.makeText(ProfileActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
     }
 

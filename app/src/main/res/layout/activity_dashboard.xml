@@ -23,8 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:itemBackground="@color/brown6"
         app:itemIconTint="@drawable/state_bnve"
         app:itemTextColor="@drawable/state_bnve"
