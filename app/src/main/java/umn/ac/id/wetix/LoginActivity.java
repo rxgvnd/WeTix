@@ -1,5 +1,6 @@
 package umn.ac.id.wetix;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,26 +16,30 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import static android.text.Html.fromHtml;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText TxUsername, TxPassword;
+    EditText TxEmail, TxPassword;
     Button BtnLogin;
-//    DBHelper dbHelper;
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        TxUsername = findViewById(R.id.txUsername);
+        TxEmail = findViewById(R.id.txUsername);
         TxPassword = findViewById(R.id.txPassword);
         BtnLogin = findViewById(R.id.btnLogin);
-//        dbHelper = new DBHelper(this);
+        fAuth = FirebaseAuth.getInstance();
         SharedPrefManager sharedPrefManager;
         sharedPrefManager = new SharedPrefManager(this);
-
         if (sharedPrefManager.getSPSudahLogin()){
             String toastMessage = "Already Logged In, Redirecting . . .";
             Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
@@ -45,42 +50,56 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
-
         TextView tvCreateAccount = findViewById(R.id.tvCreateAccount);
         tvCreateAccount.setText(fromHtml("I don't have account yet. " + "</font><font color='#3b5998'>create one</font>"));
-
         tvCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
-//        BtnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String username = TxUsername.getText().toString().trim();
-//                String password = TxPassword.getText().toString().trim();
-//
-////                Boolean res = dbHelper.checkUser(username, password);
-//                if (res == true){
-//                    sharedPrefManager.saveSPString(SharedPrefManager.SP_ID, username);
-//                    // Shared Pref ini berfungsi untuk menjadi trigger session login
-//                    sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
-//                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(LoginActivity.this, Dashboard.class));
-//                } else {
-//                    Toast.makeText( LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-    }
-    public static Spanned fromHtml(String html) {
-            Spanned result;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
-            }else {
-                result = Html.fromHtml(html);
+
+        BtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = TxEmail.getText().toString().trim();
+                String password = TxPassword.getText().toString().trim();
+
+                if(TextUtils.isEmpty(email)){
+                    TxEmail.setError("Email is Required.");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(password)){
+                    TxEmail.setError("Password is Required.");
+                    return;
+                }
+
+                if(password.length() < 6){
+                    TxPassword.setError("Password Must be >= 6 Characters");
+                    return;
+                }
+
+
+                // authenticate the user
+
+                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            sharedPrefManager.saveSPString(SharedPrefManager.SP_ID, email);
+                            // Shared Pref ini berfungsi untuk menjadi trigger session login
+                            sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
+                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, Dashboard.class));
+                        }else {
+                            Toast.makeText(LoginActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
             }
-            return result;
+        });
     }
 }
