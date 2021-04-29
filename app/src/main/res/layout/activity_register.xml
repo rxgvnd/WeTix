@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:fontFamily="More Fonts..."
             android:text="Register to WeTix"
             android:textColor="@color/white"
             android:textSize="30sp" />

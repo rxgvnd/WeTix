@@ -72,8 +72,14 @@
             android:id="@+id/tvCreateAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< Updated upstream
             android:layout_marginStart="90dp"
             android:textColor="@color/black"
             android:text="Create Account Click Here" />
+=======
+            android:layout_marginLeft="90dp"
+            android:text="Create Account Click Here"
+            android:textColor="@color/black" />
+>>>>>>> Stashed changes
     </LinearLayout>
 </LinearLayout>
