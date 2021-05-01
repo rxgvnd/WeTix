@@ -18,18 +18,6 @@
         android:layout_width="match_parent"
         android:layout_height="605dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-          <com.denzcoskun.imageslider.ImageSlider
-              android:id="@+id/slider"
-              app:placeholder="@color/white"
-              app:error_image="@color/brown1"
-              android:layout_width="match_parent"
-              android:layout_height="210dp"
-              app:auto_cycle="true"
-              app:corner_radius="5"
-              app:delay="0"
-              app:period="1000">
-          </com.denzcoskun.imageslider.ImageSlider>
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
