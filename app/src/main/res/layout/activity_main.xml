@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="WeTix"
-        android:textStyle="bold"
+        android:fontFamily="@font/nunito_black"
         android:textColor="@color/black"
         android:textSize="40sp"
         android:textAlignment="center"
@@ -37,7 +37,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="4dp"
             android:background="@drawable/buttonstyle2"
-            android:textStyle="bold"
+            android:fontFamily="@font/nunito_black"
             android:text="Login" />
     </LinearLayout>
     <LinearLayout
@@ -55,7 +55,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="4dp"
             android:background="@drawable/buttonstyle2"
-            android:textStyle="bold"
+            android:fontFamily="@font/nunito_black"
             android:text="Register" />
     </LinearLayout>
 </LinearLayout>
