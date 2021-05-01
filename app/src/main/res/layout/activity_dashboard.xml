@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Dashboard"
-    android:background="@color/cream2">
+    android:background="@color/cream2"
+    android:orientation="vertical">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
-    
+
     <FrameLayout
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="605dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+          <com.denzcoskun.imageslider.ImageSlider
+              android:id="@+id/slider"
+              app:placeholder="@color/white"
+              app:error_image="@color/brown1"
+              android:layout_width="match_parent"
+              android:layout_height="210dp"
+              app:auto_cycle="true"
+              app:corner_radius="5"
+              app:delay="0"
+              app:period="1000">
+          </com.denzcoskun.imageslider.ImageSlider>
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigationView"
@@ -27,4 +42,4 @@
         app:itemIconTint="@drawable/state_bnve"
         app:itemTextColor="@drawable/state_bnve"
         app:menu="@menu/navigation"/>
-</RelativeLayout>
+</LinearLayout>
