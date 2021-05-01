@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import static android.text.Html.fromHtml;
 
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText TxEmail, TxPassword;
     Button BtnLogin;
     FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +40,11 @@ public class LoginActivity extends AppCompatActivity {
         TxPassword = findViewById(R.id.txPassword);
         BtnLogin = findViewById(R.id.btnLogin);
         fAuth = FirebaseAuth.getInstance();
-        SharedPrefManager sharedPrefManager;
-        sharedPrefManager = new SharedPrefManager(this);
-        if (sharedPrefManager.getSPSudahLogin()){
+        fStore = FirebaseFirestore.getInstance();
+        if(fAuth.getCurrentUser() != null){
             String toastMessage = "Already Logged In, Redirecting . . .";
             Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
-            Intent hvLoggedIN = new Intent(LoginActivity.this, Dashboard.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            hvLoggedIN.putExtra("FROM_ACTIVITY", "login");
-            startActivity(hvLoggedIN);
+            startActivity(new Intent(getApplicationContext(),Dashboard.class));
             finish();
         }
 
@@ -82,18 +80,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 // authenticate the user
-
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            sharedPrefManager.saveSPString(SharedPrefManager.SP_ID, email);
-                            // Shared Pref ini berfungsi untuk menjadi trigger session login
-                            sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, Dashboard.class));
                         }else {
-                            Toast.makeText(LoginActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Email or Password is Wrong", Toast.LENGTH_SHORT).show();
                         }
 
                     }

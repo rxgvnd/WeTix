@@ -22,35 +22,29 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
-//import static umn.ac.id.wetix.LoginActivity.fromHtml;
 
 public class RegisterActivity extends AppCompatActivity {
 
     public static final String TAG = "TAG";
-    EditText TxUsername, TxEmail, TxPassword, TxConPassword;
+    EditText TxName, TxEmail, TxPassword, TxConPassword;
     Button BtnRegister;
     TextView mLoginBtn;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
-    private TextView tvDateResult;
+    private TextView tvBday;
     private ImageButton btDatePicker;
     FirebaseDatabase root;
     DatabaseReference reference;
@@ -60,13 +54,13 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        TxUsername = findViewById(R.id.txUsernameReg);
+        TxName = findViewById(R.id.txUsernameReg);
         TxEmail = findViewById(R.id.txEmailReg);
         TxPassword = findViewById(R.id.txPasswordReg);
         TxConPassword = findViewById(R.id.txConPassword);
         BtnRegister = findViewById(R.id.btnRegister);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-        tvDateResult = (TextView) findViewById(R.id.tv_dateresult);
+        tvBday = (TextView) findViewById(R.id.tv_dateresult);
         btDatePicker = (ImageButton) findViewById(R.id.bt_datepicker);
         btDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,19 +81,22 @@ public class RegisterActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            String toastMessage = "Already Logged In, Redirecting . . .";
+            Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(),Dashboard.class));
             finish();
         }
 
         BtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = TxUsername.getText().toString().trim();
+                String name = TxName.getText().toString().trim();
                 String email = TxEmail.getText().toString().trim();
                 String password = TxPassword.getText().toString().trim();
                 String conPassword = TxConPassword.getText().toString().trim();
-                String bday = tvDateResult.getText().toString().trim();
-                String picture = "aa";
+                String bday = tvBday.getText().toString().trim();
+                String picture = "null";
+                int balance = 0;
                 root = FirebaseDatabase.getInstance();
                 reference = root.getReference("users");
 
@@ -118,17 +115,24 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (!(TextUtils.equals(password,conPassword)) ){
+                    TxPassword.setError("Password Didn't Match");
+                    TxConPassword.setError("Password Didn't Match");
+                    return;
+                }
+
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            UserHelper userModel = new UserHelper(username, bday, email, picture, password);
+                            UserHelper userModel = new UserHelper(balance, name, bday, email, picture, password);
                             reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                         Toast.makeText(RegisterActivity.this, "User Created.", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                        Intent intent = new Intent(RegisterActivity.this, Dashboard.class);
+                                        startActivity(intent);
                                     }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
@@ -149,7 +153,8 @@ public class RegisterActivity extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -173,7 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                tvDateResult.setText(dateFormatter.format(newDate.getTime()));
+                tvBday.setText(dateFormatter.format(newDate.getTime()));
             }
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();

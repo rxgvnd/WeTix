@@ -1,16 +1,42 @@
 package umn.ac.id.wetix;
 
 public class UserHelper {
-    String username, email, bday, picture, password, conPassword;
+    String name, email, bday, picture, password, conPassword;
+    int balance;
 
     public UserHelper(){}
 
-    public UserHelper(String username, String bday, String email, String picture, String password) {
-        this.username = username;
+    public UserHelper(int balance, String name, String bday, String email, String picture, String password) {
+        this.balance = balance;
+        this.name = name;
         this.email = email;
         this.bday = bday;
         this.password = password;
         this.picture = picture;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
     public String getBday() {
@@ -19,22 +45,6 @@ public class UserHelper {
 
     public void setBday(String bday) {
         this.bday = bday;
-    }
-
-    public String getPhoto() {
-        return picture;
-    }
-
-    public void setPhoto(String picture) {
-        this.picture = picture;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {

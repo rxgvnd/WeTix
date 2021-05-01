@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:hint="Username"
+                android:hint="Your Name"
                 android:fontFamily="@font/nunito_black"
                 android:inputType="textPersonName"
                 android:textColor="@color/black" />
@@ -61,14 +61,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="38dp"
-                android:layout_weight="1"
+                android:layout_weight="43"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Birthday: "
                     android:fontFamily="@font/nunito_black"
+                    android:text="Birthday: "
                     android:textSize="18sp" />
 
                 <TextView
