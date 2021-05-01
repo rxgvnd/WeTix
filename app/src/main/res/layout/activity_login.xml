@@ -16,16 +16,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Login to WeTix"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:layout_marginStart="30dp"/>
+            android:fontFamily="@font/nunito_black"
+            android:textSize="35sp"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp">
 
         <EditText
             android:id="@+id/txUsername"
@@ -34,7 +39,8 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="30dp"
-            android:hint="Input Username"
+            android:fontFamily="@font/nunito_black"
+            android:hint="Username"
             android:inputType="textEmailAddress"
             android:textColor="@color/black" />
 
@@ -45,7 +51,8 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
-            android:hint="Input Password"
+            android:fontFamily="@font/nunito_black"
+            android:hint="Password"
             android:textColor="@color/black"
             android:inputType="textPassword" />
 
@@ -62,24 +69,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="4dp"
                 android:background="@drawable/buttonstyle"
-                android:textStyle="bold"
+                android:fontFamily="@font/nunito_black"
                 android:text="Login" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvCreateAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< Updated upstream
-            android:layout_marginStart="90dp"
+            android:id="@+id/tvCreateAccount"
+            android:layout_marginTop="10dp"
             android:textColor="@color/black"
+            android:fontFamily="@font/nunito_black"
             android:text="Create Account Click Here" />
-=======
-            android:layout_marginLeft="90dp"
-            android:text="Create Account Click Here"
-            android:textColor="@color/black" />
->>>>>>> Stashed changes
     </LinearLayout>
 </LinearLayout>
