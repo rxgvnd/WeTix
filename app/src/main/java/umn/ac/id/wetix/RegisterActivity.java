@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -95,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = TxPassword.getText().toString().trim();
                 String conPassword = TxConPassword.getText().toString().trim();
                 String bday = tvBday.getText().toString().trim();
-                String picture = "null";
+                Uri picture = null;
                 int balance = 0;
                 root = FirebaseDatabase.getInstance();
                 reference = root.getReference("users");
@@ -125,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            UserHelper userModel = new UserHelper(balance, name, bday, email, picture, password);
+                            UserHelper userModel = new UserHelper(balance, name, bday, email, password);
                             reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

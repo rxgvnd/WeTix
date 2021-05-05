@@ -8,19 +8,19 @@
     <FrameLayout
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
-        android:layout_height="605dp"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/slider"
-            app:placeholder="@color/white"
-            app:error_image="@color/brown1"
+            app:iss_placeholder="@color/white"
+            app:iss_error_image="@color/brown1"
             android:layout_width="match_parent"
             android:layout_height="210dp"
-            app:auto_cycle="true"
-            app:corner_radius="5"
-            app:delay="0"
-            app:period="1000">
+            app:iss_auto_cycle="true"
+            app:iss_corner_radius="5"
+            app:iss_delay="0"
+            app:iss_period="4000">
         </com.denzcoskun.imageslider.ImageSlider>
     </FrameLayout>
 

@@ -1,18 +1,17 @@
 package umn.ac.id.wetix;
 
 public class UserHelper {
-    String name, email, bday, picture, password, conPassword;
+    String name, email, bday, password, conPassword;
     int balance;
 
     public UserHelper(){}
 
-    public UserHelper(int balance, String name, String bday, String email, String picture, String password) {
+    public UserHelper(int balance, String name, String bday, String email, String password) {
         this.balance = balance;
         this.name = name;
         this.email = email;
         this.bday = bday;
         this.password = password;
-        this.picture = picture;
     }
 
     public String getName() {
@@ -21,14 +20,6 @@ public class UserHelper {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
     }
 
     public int getBalance() {
