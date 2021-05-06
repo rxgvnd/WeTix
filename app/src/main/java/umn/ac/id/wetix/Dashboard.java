@@ -31,7 +31,9 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
         setContentView(R.layout.activity_dashboard);
 
         toProfile = findViewById(R.id.toProfile);
-        loadFragment(new HomeFragment());
+        if(savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, new HomeFragment()).commit();
+        }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -66,8 +68,8 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
             case R.id.navigation_home:
                 fragment = new HomeFragment();
                 break;
-            case R.id.navigation_movie:
-                fragment = new MovieFragment();
+            case R.id.navigation_theatres:
+                fragment = new TheatreFragment();
                 break;
             case R.id.navigation_ticket:
                 fragment = new TicketFragment();

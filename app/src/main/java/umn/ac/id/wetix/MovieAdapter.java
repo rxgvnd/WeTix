@@ -1,0 +1,60 @@
+package umn.ac.id.wetix;
+
+import android.graphics.Movie;
+import android.net.Uri;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
+
+public class MovieAdapter extends FirebaseRecyclerAdapter <MovieHelper, MovieAdapter.moviesViewholder>{
+    public MovieAdapter(
+            @NonNull FirebaseRecyclerOptions<MovieHelper> options
+    ){
+        super (options);
+    }
+
+    @Override
+    protected void onBindViewHolder(@NonNull @NotNull MovieAdapter.moviesViewholder holder,
+                                    int position, @NonNull @NotNull MovieHelper model) {
+        Uri uri = Uri.parse(model.getPoster());
+        Picasso.get().load(uri).into(holder.poster);
+        holder.title.setText(model.getNamemovie());
+    }
+
+    @NonNull
+    @Override
+    public moviesViewholder
+    onCreateViewHolder(@NonNull ViewGroup parent,
+                       int viewType)
+    {
+        View view
+                = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.movie, parent, false);
+        return new MovieAdapter.moviesViewholder(view);
+    }
+
+    class moviesViewholder
+            extends RecyclerView.ViewHolder {
+        ImageView poster;
+        TextView title;
+        public moviesViewholder(@NonNull View itemView)
+        {
+            super(itemView);
+
+            poster = itemView.findViewById(R.id.posternya);
+            title = itemView.findViewById(R.id.judulnya);
+        }
+    }
+}

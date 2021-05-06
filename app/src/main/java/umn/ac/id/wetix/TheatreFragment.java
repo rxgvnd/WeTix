@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MovieFragment extends Fragment {
+public class TheatreFragment extends Fragment {
 
-    public MovieFragment() {
+    public TheatreFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +23,7 @@ public class MovieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_movie, container, false);
+        View view = inflater.inflate(R.layout.fragment_theatre, container, false);
         return view;
     }
 }

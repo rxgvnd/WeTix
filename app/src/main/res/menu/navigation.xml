@@ -5,9 +5,9 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home"/>
     <item
-        android:id="@+id/navigation_movie"
+        android:id="@+id/navigation_theatres"
         android:icon="@drawable/ic_movie"
-        android:title="@string/movie"/>
+        android:title="@string/theatre"/>
     <item
         android:id="@+id/navigation_ticket"
         android:icon="@drawable/ic_tickets"
