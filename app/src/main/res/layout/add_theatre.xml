@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp">
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btTheatrePict"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="profilepic"
+                android:text="browse poster"/>
+
+            <EditText
+                android:id="@+id/txTheatreName"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_black"
+                android:inputType="textPersonName"
+                android:hint="Theatre Name" />
+
+
+            <EditText
+                android:id="@+id/txLatitude"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_black"
+                android:hint="Latitude" />
+
+            <EditText
+                android:id="@+id/txLongitude"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_black"
+                android:hint="Longitude" />
+
+            <Button
+                android:id="@+id/sendTheatre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SAVE"
+                android:layout_gravity="right"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
