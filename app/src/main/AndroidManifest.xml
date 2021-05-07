@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="umn.ac.id.wetix">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeTix">
+        <activity android:name=".TopUpActivity"></activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".Dashboard" />
         <activity android:name=".RegisterActivity" />
