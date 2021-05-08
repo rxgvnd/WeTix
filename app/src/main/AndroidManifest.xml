@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeTix">
-        <activity android:name=".PaymentActivity"></activity>
+        <activity android:name=".NewsPageActivity"></activity>
+        <activity android:name=".PaymentActivity" />
         <activity android:name=".TopUpActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".Dashboard" />
