@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentActivity"
+    android:background="@color/cream2">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:text="Total : "
+        android:id="@+id/total"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/total"
+        android:text="Rp 250.000"
+        android:id="@+id/totalPay"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"/>
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/totalPay"
+        android:text="PAY"
+        android:id="@+id/btnPay"
+        android:textSize="20dp"
+        android:background="@color/brown3"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="300dp"/>
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/totalPay"
+        android:text="Cancle"
+        android:id="@+id/btnCancle"
+        android:textSize="20dp"
+        android:background="@color/Red"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="190dp"/>
+</RelativeLayout>
