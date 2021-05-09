@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -95,9 +96,7 @@ public class ProfileActivity extends AppCompatActivity {
         profPicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-
                 Picasso.get().load(uri).resize(600,600).into(profpic);
-
             }
         });
 
@@ -148,9 +147,15 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void SelectImage()
     {
-        Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(openGallery, 1000);
-
+        // Defining Implicit Intent to mobile gallery
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(
+                        intent,
+                        "Select Image from here..."),
+                PICK_IMAGE_REQUEST);
     }
 
     @Override
@@ -170,6 +175,7 @@ public class ProfileActivity extends AppCompatActivity {
                 && data.getData() != null) {
             filePath = data.getData();
             try {
+                Log.d("test", "test");
                 // Setting image on image view using Bitmap
                 Bitmap bitmap = MediaStore
                         .Images
@@ -198,27 +204,36 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void updateUser(UserHelper user, Uri imageUri){
-        StorageReference fileRef = upImageRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .setValue(user)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(ProfileActivity.this, "Data Berhasil diubah", Toast.LENGTH_SHORT).show();
+        if(imageUri != null) {
+            StorageReference fileRef = upImageRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(user)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(ProfileActivity.this, "Data Berhasil diubah", Toast.LENGTH_SHORT).show();
 //                                finish();
-                            }
-                        });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Terjadi kesalahan, gagal menyimpan data", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+                                }
+                            });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @NotNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Terjadi kesalahan, gagal menyimpan data", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e)
+                {
+                    Toast.makeText(getApplicationContext(),
+                                    "Image Error" + e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override

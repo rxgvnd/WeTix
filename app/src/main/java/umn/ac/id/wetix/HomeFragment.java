@@ -61,16 +61,12 @@ public class HomeFragment extends Fragment {
         List<SlideModel> imageList = new ArrayList<>();
         for(int i = 1; i < 6; i++){
             String test = "movie"+i;
-            Log.d("TAG", test);
             ref.child(test).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-                    Log.d("tag", "test");
                     MovieHelper movie = snapshot.getValue(MovieHelper.class);
                     String link = movie.getPoster();
                     String title = movie.getNamemovie();
-
                     imageList.add(new SlideModel(link, title, ScaleTypes.CENTER_INSIDE));
                     imageSlider.setImageList(imageList);
                 }

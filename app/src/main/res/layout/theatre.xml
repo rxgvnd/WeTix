@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
@@ -11,32 +10,48 @@
     android:scrollbars="vertical"
     app:cardCornerRadius="20dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/namaBioskop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Nama Bioskop: "
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingLeft="12dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Nama Bioskop"
+            android:textStyle="bold"/>
+
 
         <TextView
-            android:id="@+id/namaBioskop"
-            android:layout_width="0dp"
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView1"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingLeft="12dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Jarak : "
+            android:textStyle="bold"
+            android:layout_below="@+id/namaBioskop"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/jarak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/textView2"
+            android:layout_below="@id/namaBioskop"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView" />
+
+
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

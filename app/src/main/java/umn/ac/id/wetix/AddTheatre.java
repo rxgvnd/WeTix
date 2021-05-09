@@ -35,19 +35,14 @@ import java.io.File;
 import java.io.IOException;
 
 public class AddTheatre {
-    Activity activity;
 
 
     public void showPopupWindow(final View view) {
         EditText etName, etLatitude, etLongitude;
-        FirebaseAuth fAuth;
         FirebaseDatabase root;
         DatabaseReference reference;
-        StorageReference upImageRef;
-        fAuth =FirebaseAuth.getInstance();
         root = FirebaseDatabase.getInstance();
         reference = root.getReference("theatres");
-//        upImageRef = FirebaseStorage.getInstance().getReference("moviePosters");
 
         //Create a View object yourself through inflater
         LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
@@ -72,14 +67,6 @@ public class AddTheatre {
         etLatitude = popupView.findViewById(R.id.txLatitude);
         etLongitude = popupView.findViewById(R.id.txLongitude);
 
-       Button addPhoto =popupView.findViewById(R.id.btTheatrePict);
-       addPhoto.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-//               SelectImage();
-           }
-       });
-//        Log.d("uri", filePath.toString());
 
         Button sendTheatre = popupView.findViewById(R.id.sendTheatre);
         sendTheatre.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +86,6 @@ public class AddTheatre {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(v.getContext(), "Data Berhasil ditambah", Toast.LENGTH_SHORT).show();
-//                                finish();
                                     }
                                 });
                     }
