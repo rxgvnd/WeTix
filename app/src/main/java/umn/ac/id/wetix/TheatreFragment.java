@@ -131,7 +131,6 @@ public class TheatreFragment extends Fragment {
         if (adapter != null) {
             adapter.startListening();
         }
-
     }
 
     @Override
