@@ -39,6 +39,8 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -50,14 +52,12 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageButton profpic;
     EditText etName, etPass;
     TextView txEmail, txBalance, txBday;
-    SharedPrefManager sharedPrefManager;
     Button saveProfile;
     FirebaseAuth fAuth;
-    FirebaseDatabase root;
-    DatabaseReference reference;
+    DatabaseReference reference, refSaldo;
     StorageReference upImageRef;
     String name, newName, email, password, newPassword, newBday;
-    int balance;
+    long balance;
     private Uri filePath, newPict;
 
     @Override
@@ -65,9 +65,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ImageButton btDatePicker;
-        fAuth =fAuth.getInstance();
-        root = FirebaseDatabase.getInstance();
-        reference = root.getReference("users");
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         profpic = findViewById(R.id.profpic);
         txBalance = findViewById(R.id.txBalance);
@@ -90,7 +87,10 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        fAuth =fAuth.getInstance();
+        reference = FirebaseDatabase.getInstance().getReference("users");
         upImageRef = FirebaseStorage.getInstance().getReference("usersProfPic");
+        refSaldo = FirebaseDatabase.getInstance().getReference("UsersBalance");
 
         StorageReference profPicRef = upImageRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         profPicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -106,13 +106,11 @@ public class ProfileActivity extends AppCompatActivity {
                 //Mengambil daftar item dari database, setiap kali ada turunannya
                 UserHelper user = dataSnapshot.getValue(UserHelper.class);
                 email = user.getEmail();
-                balance = user.getBalance();
                 name = user.getName();
                 newBday = user.getBday();
                 password = user.getPassword();
 
                 txEmail.setText(email);
-                txBalance.setText("Rp. "+ balance);
                 etName.setText(name);
                 txBday.setText(newBday);
             }
@@ -122,27 +120,62 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        newPassword = etPass.getText().toString().trim();
+        refSaldo.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Mengambil daftar item dari database, setiap kali ada turunannya
+                NumberFormat formatter = new DecimalFormat("#,###");
+                balance = (long) dataSnapshot.getValue();
+                String formattedNumber = formatter.format(balance);
+                txBalance.setText("Rp." + formattedNumber);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
         saveProfile = findViewById(R.id.saveProf);
-        if(TextUtils.isEmpty(newPassword)) {
-            saveProfile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        saveProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newPassword = etPass.getText().toString().trim();
+                if(TextUtils.isEmpty(newPassword)) {
                     newName = etName.getText().toString();
+                    if(TextUtils.isEmpty(newName)){
+                        etName.setError("Nama gabole kosong");
+                        return;
+                    }
                     UserHelper upUser = new UserHelper();
                     newPict = filePath;
                     upUser.setEmail(email);
                     upUser.setName(newName);
-                    upUser.setBalance(balance);
+//                    upUser.setBalance(balance);
                     upUser.setBday(newBday);
                     upUser.setPassword(password);
                     updateUser(upUser, newPict);
+                } else if(!(TextUtils.isEmpty(newPassword))) {
+                    newName = etName.getText().toString();
+                    newPassword = etPass.getText().toString().trim();
+                    if(newPassword.length() < 6){
+                        etPass.setError("Password Must be >= 6 Characters");
+                        return;
+                    }
+                    UserHelper upUser = new UserHelper();
+                    newPict = filePath;
+                    upUser.setEmail(email);
+                    upUser.setName(newName);
+//                    upUser.setBalance(balance);
+                    upUser.setBday(newBday);
+                    upUser.setPassword(newPassword);
+//                    ConfPass confPass = new ConfPass();
+//                    confPass.showPopupWindow(view, upUser, newPict, password);
+                    updateUser(upUser, newPict);
                 }
-            });
-        }
-        Toolbar toolbar = findViewById(R.id.profile_tool);
-        setSupportActionBar(toolbar);
+            }
+        });
+    Toolbar toolbar = findViewById(R.id.profile_tool);
+    setSupportActionBar(toolbar);
     }
 
     private void SelectImage()
@@ -203,26 +236,14 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void updateUser(UserHelper user, Uri imageUri){
+    public void updateUser(UserHelper user, Uri imageUri){
         if(imageUri != null) {
             StorageReference fileRef = upImageRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
             fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(user)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(ProfileActivity.this, "Data Berhasil diubah", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this, "Data Berhasil diubah", Toast.LENGTH_SHORT).show();
 //                                finish();
-                                }
-                            });
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull @NotNull Exception e) {
-                    Toast.makeText(getApplicationContext(), "Terjadi kesalahan, gagal menyimpan data", Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -231,6 +252,19 @@ public class ProfileActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                                     "Image Error" + e.getMessage(),
                                     Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else if (user != null) {
+            DatabaseReference userRef = reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            userRef.setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(ProfileActivity.this, "Data Berhasil diubah", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @NotNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Terjadi kesalahan, gagal menyimpan data", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -247,12 +281,10 @@ public class ProfileActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.topup:
-//                Intent toProfile = new Intent(ProfileActivity.this, ProfileActivity.class);
-//                toProfile.putExtra("FROM_ACTIVITY", "songlist");
-//                startActivity(toProfile);
+                Intent toTopUp = new Intent(ProfileActivity.this, TopUpActivity.class);
+                startActivity(toTopUp);
                 return true;
             case R.id.logout:
-                sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(ProfileActivity.this, MainActivity.class));
                 finish();

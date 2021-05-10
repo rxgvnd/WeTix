@@ -3,9 +3,13 @@ package umn.ac.id.wetix;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,8 +39,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class AddTheatre {
-
-
     public void showPopupWindow(final View view) {
         EditText etName, etLatitude, etLongitude;
         FirebaseDatabase root;
@@ -62,20 +64,33 @@ public class AddTheatre {
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
         //Initialize the elements of our window, install the handler
-
         etName = popupView.findViewById(R.id.txTheatreName);
         etLatitude = popupView.findViewById(R.id.txLatitude);
         etLongitude = popupView.findViewById(R.id.txLongitude);
-
 
         Button sendTheatre = popupView.findViewById(R.id.sendTheatre);
         sendTheatre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = etName.getText().toString().trim();
-                Double latitude = Double.parseDouble(etLatitude.getText().toString().trim());
-                Double longitude = Double.parseDouble(etLongitude.getText().toString().trim());
 
+                if(TextUtils.isEmpty(etName.getText().toString().trim())){
+                    etName.setError("Name is Required.");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(etLongitude.getText().toString().trim())){
+                    etLatitude.setError("Latitude is Required.");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(etLongitude.getText().toString().trim())){
+                    etLongitude.setError("Longitude is Required.");
+                    return;
+                }
+
+                String name = etName.getText().toString().trim();
+                Double longitude = Double.parseDouble(etLongitude.getText().toString().trim());
+                Double latitude = Double.parseDouble(etLatitude.getText().toString().trim());
                 TheatreHelper theatre = new TheatreHelper();
                 theatre.setItsName(name);
                 theatre.setLatitude(latitude);
@@ -86,11 +101,15 @@ public class AddTheatre {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(v.getContext(), "Data Berhasil ditambah", Toast.LENGTH_SHORT).show();
+                                        popupWindow.dismiss();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d("TAG", "onFailure: " + e.toString());
                                     }
                                 });
                     }
                 });
     }
-
-
 }

@@ -1,10 +1,14 @@
 package umn.ac.id.wetix;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,19 +35,18 @@ import com.google.firebase.database.Query;
 
 import java.text.NumberFormat;
 
-public class TheatreFragment extends Fragment {
-    private String admin = "DczDfYT80rbLioDeSvgUYaDIEQg1", uid, jarak;
+public class TheatreFragment extends Fragment implements LocationListener {
+    private String admin = "DczDfYT80rbLioDeSvgUYaDIEQg1", uid;
     Location currentLocation;
-    FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
-    String currLat, currLong;
     double currLati, currLongi;
     private RecyclerView theatreRV;
     TheatreAdapter adapter;
     ImageButton addTheatre;
-    TextView curlat, curlong;
+    protected LocationManager locationManager;
+//    TextView curlat, curlong;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    DatabaseReference ref=  FirebaseDatabase.getInstance().getReference("theatres");
+//    DatabaseReference ref=  FirebaseDatabase.getInstance().getReference("theatres");
 
     public TheatreFragment() {
         // Required empty public constructor
@@ -68,62 +71,49 @@ public class TheatreFragment extends Fragment {
                 popUpClass.showPopupWindow(v);
             }
         });
-
+        //check admin
         uid = user.getUid();
         if(uid.equals(admin)){
             addTheatre.setVisibility(View.VISIBLE);
         }
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
-        curlat = view.findViewById(R.id.curlat);
-        curlong = view.findViewById(R.id.curlong);
-        fetchLocation();
-//        setLoc();
-
+        //check permission, just in case
+        if (ActivityCompat.checkSelfPermission(
+                getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        }
+        //fetch lat, long
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        currentLocation = locationManager
+                .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (currentLocation != null) {
+            currLati = (double) currentLocation.getLatitude();
+            currLongi = (double) currentLocation.getLongitude();
+        }
+        //recycler adapter
         Query query = FirebaseDatabase.getInstance().getReference("theatres");
         theatreRV = view.findViewById((R.id.recyclerTheatre));
         theatreRV.setLayoutManager(new LinearLayoutManager(getActivity()));
         FirebaseRecyclerOptions<TheatreHelper> options = new FirebaseRecyclerOptions.Builder<TheatreHelper>()
                 .setQuery(query, TheatreHelper.class)
                 .build();
-        Log.d("currloc", currLat + ", " + currLong);
-//        adapter = new TheatreAdapter(options, currLati, currLongi);
+        adapter = new TheatreAdapter(options, currLati, currLongi);
         theatreRV.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false
         ));
         theatreRV.setAdapter(adapter);
-                return view;
+        return view;
 
     }
 
-    private void setLoc() {
-        currLat = curlat.getText().toString().trim();
-        currLong = curlong.getText().toString().trim();
-        currLati = Double.parseDouble(currLat);
-        currLongi =Double.parseDouble(currLong);
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+//        currLati = location.getLatitude();
+//        currLongi = location.getLongitude();
+//        NumberFormat nm = NumberFormat.getNumberInstance();
+//        curlat.setText(nm.format(location.getLatitude()));
+//        curlong.setText(nm.format(location.getLongitude()));
+//        Log.d("currloc", currLat + ", " + currLong);
     }
-
-    private void fetchLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-            return;
-        }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
-                    Toast.makeText(getActivity().getApplicationContext(), currentLocation.getLatitude() + ", " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
-                    NumberFormat nm = NumberFormat.getNumberInstance();
-                    curlat.setText(nm.format(currentLocation.getLatitude()));
-                    curlong.setText(nm.format(currentLocation.getLongitude()));
-                }
-            }
-        });
-    }
-
 
     @Override
     public void onStart() {

@@ -7,86 +7,147 @@
     tools:context=".TopUpActivity"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/toolbartopup"
-        layout="@layout/toolbartopup"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
+        <include
+            android:id="@+id/toolbartopup"
+            layout="@layout/toolbartopup" />
+
         <ImageView
+            android:id="@+id/profPict"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/profPict"/>
+            android:layout_below="@id/toolbartopup" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_below="@id/toolbartopup"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/profPict"
+            android:fontFamily="@font/nunito_black"
+            android:gravity=""
             android:text="Name : "
-            android:textSize="20dp"
-            android:gravity=""
-            android:fontFamily="@font/nunito_black"
             android:textColor="@color/black"
-            android:layout_marginStart="5dp"
+            android:textSize="20dp" />
+
+        <TextView
             android:id="@+id/name"
-            android:layout_toEndOf="@+id/profPict"/>
-        <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:textSize="20dp"
+            android:layout_below="@id/toolbartopup"
+            android:layout_toEndOf="@id/tv"
+            android:fontFamily="@font/nunito_black"
+            android:gravity=""
+            android:text="(namauser)"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/tv"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/profPict"
+            android:fontFamily="@font/nunito_black"
+            android:gravity=""
             android:text="Email : "
-            android:fontFamily="@font/nunito_black"
             android:textColor="@color/black"
-            android:gravity=""
-            android:layout_marginStart="5dp"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/email"
-            android:layout_toEndOf="@+id/profPict"
-            android:layout_below="@+id/name"/>
-        <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Birthday : "
-            android:textSize="20dp"
+            android:layout_below="@id/name"
+            android:layout_toEndOf="@id/tv2"
             android:fontFamily="@font/nunito_black"
-            android:textColor="@color/black"
             android:gravity=""
-            android:id="@+id/birth"
+            android:text="(emailuser)"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/tv2"
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@+id/profPict"
-            android:layout_below="@+id/email"/>
-        <TextView
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:text="My Balance"
             android:fontFamily="@font/nunito_black"
+            android:text="Birthday : "
             android:textColor="@color/black"
+            android:gravity=""
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/birth"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/email"
+            android:layout_toEndOf="@+id/tv3"
+            android:fontFamily="@font/nunito_black"
+            android:gravity=""
+            android:text="(ultahuser)"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:layout_marginTop="15dp"
             android:layout_below="@+id/profPict"
-            android:background="@color/cream"
-            android:id="@+id/mybalance"/>
-        <TextView
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:text="Rp.1.000.000"
-            android:textSize="40dp"
-            android:fontFamily="@font/nunito_black"
-            android:textColor="@color/black"
-            android:id="@+id/saldo"
-            android:layout_below="@+id/mybalance"
-            android:background="@color/cream"/>
-        <Button
-            android:layout_width="90dp"
-            android:layout_height="72dp"
-            android:id="@+id/btnTopUp"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/mybalance"
-            android:layout_below="@+id/birth"
-            android:text="Top Up"
-            android:fontFamily="@font/nunito_black"
-            android:textColor="@color/black"
-            android:background="@color/brown2"/>
+            android:id="@+id/topUpYuk">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter Amount"
+                android:fontFamily="@font/nunito_black"
+                android:textColor="@color/black"
+                android:background="@color/cream"
+                android:id="@+id/amount"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Rp."
+                android:textSize="40dp"
+                android:fontFamily="@font/nunito_black"
+                android:textColor="@color/black"
+                android:id="@+id/rp"
+                android:layout_below="@+id/amount"
+                android:background="@color/cream"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:hint="Masukkan jumlah TopUp"
+                android:textSize="18sp"
+                android:fontFamily="@font/nunito_black"
+                android:textColor="@color/black"
+                android:id="@+id/masukkanUang"
+                android:layout_toEndOf="@id/rp"
+                android:layout_below="@+id/amount"
+                android:background="@color/cream" />
+
+            <Button
+                android:id="@+id/btnTopUp"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:layout_alignEnd="@id/masukkanUang"
+                android:background="@color/brown2"
+                android:fontFamily="@font/nunito_black"
+                android:text="Top Up"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,10 +155,11 @@
             android:fontFamily="@font/nunito_black"
             android:textColor="@color/black"
             android:id="@+id/recenttopup"
-            android:layout_below="@+id/saldo"
+            android:layout_below="@+id/topUpYuk"
             android:layout_marginTop="15dp"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold"/>
+
         <TextView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -107,6 +169,7 @@
             android:id="@+id/date"
             android:layout_below="@+id/recenttopup"
             android:layout_marginTop="10dp"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,9 +180,6 @@
             android:layout_marginTop="10dp"
             android:layout_below="@+id/recenttopup"
             android:text="Total saldo"/>
+
     </RelativeLayout>
-
-
-
-
 </LinearLayout>
