@@ -17,7 +17,10 @@
         <RelativeLayout
             android:id="@+id/rLay"
             android:layout_width="180dp"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/posternya"
@@ -25,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/judulnya"
                 android:src="@drawable/ic_no_image"
-                tools:layout_centerHorizontal="true" />
+                tools:layout_centerHorizontal="true"/>
 
             <TextView
                 android:id="@+id/judulnya"
@@ -34,7 +37,7 @@
                 android:layout_alignParentBottom="true"
                 android:text="Judul"
                 android:textSize="20sp"
-                tools:textAlignment="center" />
+                tools:textAlignment="center"/>
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

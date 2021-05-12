@@ -38,17 +38,15 @@ import java.util.Locale;
 public class RegisterActivity extends AppCompatActivity {
 
     public static final String TAG = "TAG";
-    EditText TxName, TxEmail, TxPassword, TxConPassword;
-    Button BtnRegister;
-    TextView mLoginBtn;
-    FirebaseAuth fAuth;
-    FirebaseFirestore fStore;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
     private TextView tvBday;
     private ImageButton btDatePicker;
-    FirebaseDatabase root;
+    FirebaseAuth fAuth;
     DatabaseReference reference;
+    EditText TxName, TxEmail, TxPassword, TxConPassword;
+    Button BtnRegister;
+    TextView mLoginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
         if(fAuth.getCurrentUser() != null){
             String toastMessage = "Already Logged In, Redirecting . . .";
             Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
@@ -96,10 +93,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = TxPassword.getText().toString().trim();
                 String conPassword = TxConPassword.getText().toString().trim();
                 String bday = tvBday.getText().toString().trim();
-                Uri picture = null;
                 int balance = 0;
-                root = FirebaseDatabase.getInstance();
-                reference = root.getReference("users");
+                reference = FirebaseDatabase.getInstance().getReference("users");
 
                 if(TextUtils.isEmpty(email)){
                     TxEmail.setError("Email is Required.");

@@ -53,7 +53,6 @@ public class ProfileActivity extends AppCompatActivity {
     EditText etName, etPass;
     TextView txEmail, txBalance, txBday;
     Button saveProfile;
-    FirebaseAuth fAuth;
     DatabaseReference reference, refSaldo;
     StorageReference upImageRef;
     String name, newName, email, password, newPassword, newBday;
@@ -87,7 +86,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        fAuth =fAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
         upImageRef = FirebaseStorage.getInstance().getReference("usersProfPic");
         refSaldo = FirebaseDatabase.getInstance().getReference("UsersBalance");

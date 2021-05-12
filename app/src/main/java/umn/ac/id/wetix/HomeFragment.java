@@ -1,5 +1,6 @@
 package umn.ac.id.wetix;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,8 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    FirebaseAuth fAuth;
-    FirebaseDatabase root;
     DatabaseReference ref;
     private RecyclerView movieRV;
     MovieAdapter adapter;
@@ -43,16 +42,14 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        fAuth = fAuth.getInstance();
-        root = root.getInstance();
-        ref = root.getReference("listmovie");
+        ref = FirebaseDatabase.getInstance().getReference("listmovie");
         Query query = FirebaseDatabase.getInstance().getReference("listmovie");
         movieRV = view.findViewById((R.id.recyclerNowPlaying));
         movieRV.setLayoutManager(new LinearLayoutManager(getActivity()));
         FirebaseRecyclerOptions<MovieHelper> options = new FirebaseRecyclerOptions.Builder<MovieHelper>()
                 .setQuery(query, MovieHelper.class)
                 .build();
-        adapter = new MovieAdapter(options);
+        adapter = new MovieAdapter(options, getContext());
         movieRV.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false
         ));
         movieRV.setAdapter(adapter);
@@ -60,8 +57,8 @@ public class HomeFragment extends Fragment {
         ImageSlider imageSlider = (ImageSlider) view.findViewById(R.id.slider);
         List<SlideModel> imageList = new ArrayList<>();
         for(int i = 1; i < 6; i++){
-            String test = "movie"+i;
-            ref.child(test).addValueEventListener(new ValueEventListener() {
+            String idx = "movie"+i;
+            ref.child(idx).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                     MovieHelper movie = snapshot.getValue(MovieHelper.class);
@@ -79,6 +76,7 @@ public class HomeFragment extends Fragment {
         }
         return view;
     }
+
     @Override
     public void onStart() {
         super.onStart();

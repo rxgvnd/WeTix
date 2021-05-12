@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText TxEmail, TxPassword;
     Button BtnLogin;
     FirebaseAuth fAuth;
-    FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         TxPassword = findViewById(R.id.txPassword);
         BtnLogin = findViewById(R.id.btnLogin);
         fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
         if(fAuth.getCurrentUser() != null){
             String toastMessage = "Already Logged In, Redirecting . . .";
             Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();

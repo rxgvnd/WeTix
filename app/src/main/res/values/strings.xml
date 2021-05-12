@@ -6,5 +6,14 @@
     <string name="theatre">Theatre</string>
     <string name="ticket">Ticket</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="time_array">
+        <item>08.00</item>
+        <item>10.00</item>
+        <item>12.00</item>
+        <item>14.00</item>
+        <item>16.00</item>
+        <item>18.00</item>
+        <item>20.00</item>
+        <item>22.00</item>
+    </string-array>
 </resources>
