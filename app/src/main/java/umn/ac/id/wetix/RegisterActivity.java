@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView tvBday;
     private ImageButton btDatePicker;
     FirebaseAuth fAuth;
-    DatabaseReference reference;
+    DatabaseReference reference, refSaldo;
     EditText TxName, TxEmail, TxPassword, TxConPassword;
     Button BtnRegister;
     TextView mLoginBtn;
@@ -77,6 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        refSaldo = FirebaseDatabase.getInstance().getReference("UsersBalance");
         fAuth = FirebaseAuth.getInstance();
         if(fAuth.getCurrentUser() != null){
             String toastMessage = "Already Logged In, Redirecting . . .";
@@ -126,9 +127,22 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        Toast.makeText(RegisterActivity.this, "User Created.", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(RegisterActivity.this, Dashboard.class);
-                                        startActivity(intent);
+
+                                        refSaldo.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    Toast.makeText(RegisterActivity.this, "User Created.", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(RegisterActivity.this, Dashboard.class);
+                                                    startActivity(intent);
+                                                }
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.d("TAG", "onFailure: " + e.toString());
+                                            }
+                                        });
                                     }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {

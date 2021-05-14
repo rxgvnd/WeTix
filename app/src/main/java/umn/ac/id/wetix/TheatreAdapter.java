@@ -67,8 +67,6 @@ public class TheatreAdapter extends FirebaseRecyclerAdapter<TheatreHelper, Theat
             super(itemView);
             theatreName = itemView.findViewById(R.id.namaBioskop);
             jarak = itemView.findViewById(R.id.jarak);
-
         }
-
     }
 }

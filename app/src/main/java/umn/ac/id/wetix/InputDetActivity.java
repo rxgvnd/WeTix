@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.Intent;
 import android.graphics.Movie;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +28,7 @@ import java.util.List;
 
 public class InputDetActivity extends AppCompatActivity {
     Spinner spinnerThtr, spinnerTime;
+    Button sbmtBtn;
     DatabaseReference ref;
     private String retMovie;
     private List thtrs = new ArrayList<String>();
@@ -40,7 +43,6 @@ public class InputDetActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                TheatreHelper helper = snapshot.getValue(TheatreHelper.class);
                 for (DataSnapshot thtrSnapshot: snapshot.getChildren()) {
                     String nmBioskop = thtrSnapshot.child("itsName").getValue(String.class);
                     thtrs.add(nmBioskop);
@@ -59,9 +61,19 @@ public class InputDetActivity extends AppCompatActivity {
         spinnerTime = findViewById(R.id.spnrTime);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
         R.array.time_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         spinnerTime.setAdapter(adapter);
+
+        sbmtBtn = findViewById(R.id.sbmtButton);
+        sbmtBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
+                intent.putExtra("movie_idx", getIntent().getExtras().get("movie_idx").toString());
+                intent.putExtra("time", spinnerTime.getSelectedItem().toString());
+                intent.putExtra("theatre", spinnerThtr.getSelectedItem().toString());
+                startActivity(intent);
+            }
+        });
     }
 }

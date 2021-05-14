@@ -5,6 +5,7 @@
     <string name="home">Home</string>
     <string name="theatre">Theatre</string>
     <string name="ticket">Ticket</string>
+    <string name="dropped_pin">Selected</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string-array name="time_array">
         <item>08.00</item>
@@ -16,4 +17,7 @@
         <item>20.00</item>
         <item>22.00</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
+    <string name="PostiveYesButton">Yes</string>
+    <string name="NegativeNoButton">No</string>
 </resources>

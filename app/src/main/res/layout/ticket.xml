@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="20dp"
+    android:scrollbars="vertical"
+    app:cardCornerRadius="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+        <ImageView
+            android:id="@+id/posterTiket"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="#00FFFFFF"
+            android:src="@drawable/ic_no_image"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/JudulFilm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/posterTiket"
+            android:paddingTop="10dp"
+            android:text="Judul"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/namaBioskop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bioskop"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/posterTiket"/>
+
+        <TextView
+            android:id="@+id/waktu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/posterTiket"
+            android:text="Waktu"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="10dp"/>
+
+        <Button
+            android:id="@+id/cnclButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Cancel" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

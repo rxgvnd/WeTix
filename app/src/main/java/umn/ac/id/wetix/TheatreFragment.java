@@ -44,9 +44,7 @@ public class TheatreFragment extends Fragment implements LocationListener {
     TheatreAdapter adapter;
     ImageButton addTheatre;
     protected LocationManager locationManager;
-//    TextView curlat, curlong;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//    DatabaseReference ref=  FirebaseDatabase.getInstance().getReference("theatres");
 
     public TheatreFragment() {
         // Required empty public constructor
@@ -68,7 +66,7 @@ public class TheatreFragment extends Fragment implements LocationListener {
             @Override
             public void onClick(View v) {
                 AddTheatre popUpClass = new AddTheatre();
-                popUpClass.showPopupWindow(v);
+                popUpClass.showPopupWindow(v, getContext());
             }
         });
         //check admin

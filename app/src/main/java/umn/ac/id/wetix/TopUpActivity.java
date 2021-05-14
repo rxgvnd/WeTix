@@ -39,7 +39,7 @@ public class TopUpActivity extends AppCompatActivity {
     Button topUp;
     FirebaseAuth fAuth;
     DatabaseReference refUser, refSaldo;
-    String name, email, bday;
+    String name, email;
     long updateBalance;
 
     @Override
@@ -54,7 +54,6 @@ public class TopUpActivity extends AppCompatActivity {
         txBalance = findViewById(R.id.saldo);
         etName = findViewById(R.id.name);
         txEmail = findViewById(R.id.email);
-        txBday = findViewById(R.id.birth);
 
         refUser.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -62,12 +61,8 @@ public class TopUpActivity extends AppCompatActivity {
                 //Mengambil daftar item dari database, setiap kali ada turunannya
                 UserHelper user = dataSnapshot.getValue(UserHelper.class);
                 email = user.getEmail();
-//                balance = user.getBalance();
                 name = user.getName();
-                bday = user.getBday();
-                txBday.setText(bday);
                 txEmail.setText(email);
-//                txBalance.setText(balance);
                 etName.setText(name);
             }
             @Override
@@ -95,7 +90,7 @@ public class TopUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String uang = etAmt.getText().toString();
                 updateBalance = updateBalance + Long.parseLong(uang);
-                if(updateBalance == NULL){
+                if(uang.isEmpty()){
                     etAmt.setError("Masukkin angka boss");
                     return;
                 }

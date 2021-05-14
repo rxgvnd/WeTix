@@ -1,46 +1,32 @@
 package umn.ac.id.wetix;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
-import java.io.IOException;
 
 public class AddTheatre {
-    public void showPopupWindow(final View view) {
-        EditText etName, etLatitude, etLongitude;
+    Context context;
+    public void showPopupWindow(final View view, Context context) {
+        this.context = context;
+        EditText etName, etLatitude, etLongitude, etHarga;
+        ImageButton map;
         FirebaseDatabase root;
         DatabaseReference reference;
         root = FirebaseDatabase.getInstance();
@@ -67,8 +53,19 @@ public class AddTheatre {
         etName = popupView.findViewById(R.id.txTheatreName);
         etLatitude = popupView.findViewById(R.id.txLatitude);
         etLongitude = popupView.findViewById(R.id.txLongitude);
-
+        etHarga = popupView.findViewById(R.id.txHarga);
+        map = popupView.findViewById(R.id.mapz);
         Button sendTheatre = popupView.findViewById(R.id.sendTheatre);
+
+
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (context, MapsActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
         sendTheatre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,14 +84,20 @@ public class AddTheatre {
                     etLongitude.setError("Longitude is Required.");
                     return;
                 }
+                if(TextUtils.isEmpty(etHarga.getText().toString().trim())){
+                    etHarga.setError("Longitude is Required.");
+                    return;
+                }
 
                 String name = etName.getText().toString().trim();
                 Double longitude = Double.parseDouble(etLongitude.getText().toString().trim());
                 Double latitude = Double.parseDouble(etLatitude.getText().toString().trim());
+                long harga = Long.parseLong((etHarga.getText().toString().trim()));
                 TheatreHelper theatre = new TheatreHelper();
                 theatre.setItsName(name);
                 theatre.setLatitude(latitude);
                 theatre.setLongitude(longitude);
+                theatre.setHarga(harga);
                         reference.child(name)
                                 .setValue(theatre)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -109,7 +112,7 @@ public class AddTheatre {
                                         Log.d("TAG", "onFailure: " + e.toString());
                                     }
                                 });
-                    }
-                });
+            }
+        });
     }
 }

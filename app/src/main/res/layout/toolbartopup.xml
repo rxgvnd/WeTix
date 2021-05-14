@@ -7,7 +7,7 @@
     android:background="@color/gray"
     android:elevation="4dp"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:title="WeTix Top Up">
+    app:title="Top Up">
 
     <ImageButton
         android:id="@+id/toProfile"

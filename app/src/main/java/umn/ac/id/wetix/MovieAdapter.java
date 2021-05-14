@@ -68,7 +68,6 @@ public class MovieAdapter extends FirebaseRecyclerAdapter <MovieHelper, MovieAda
         public moviesViewholder(@NonNull View itemView)
         {
             super(itemView);
-
             poster = itemView.findViewById(R.id.posternya);
             title = itemView.findViewById(R.id.judulnya);
             rtLy = itemView.findViewById(R.id.rLay);

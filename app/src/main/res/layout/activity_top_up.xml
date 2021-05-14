@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TopUpActivity"
     android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
 
         <include
             android:id="@+id/toolbartopup"
@@ -72,31 +67,6 @@
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tv3"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_below="@+id/tv2"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@+id/profPict"
-            android:fontFamily="@font/nunito_black"
-            android:text="Birthday : "
-            android:textColor="@color/black"
-            android:gravity=""
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/birth"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_below="@+id/email"
-            android:layout_toEndOf="@+id/tv3"
-            android:fontFamily="@font/nunito_black"
-            android:gravity=""
-            android:text="(ultahuser)"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -147,39 +117,4 @@
                 android:text="Top Up"
                 android:textColor="@color/black" />
         </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Recent Top Up"
-            android:fontFamily="@font/nunito_black"
-            android:textColor="@color/black"
-            android:id="@+id/recenttopup"
-            android:layout_below="@+id/topUpYuk"
-            android:layout_marginTop="15dp"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="tanggal"
-            android:fontFamily="@font/nunito_black"
-            android:textColor="@color/black"
-            android:id="@+id/date"
-            android:layout_below="@+id/recenttopup"
-            android:layout_marginTop="10dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/totsaldo"
-            android:fontFamily="@font/nunito_black"
-            android:textColor="@color/black"
-            android:layout_toEndOf="@+id/date"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/recenttopup"
-            android:text="Total saldo"/>
-
-    </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

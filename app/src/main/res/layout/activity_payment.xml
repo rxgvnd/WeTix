@@ -10,34 +10,74 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
         />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/contIsi"
+        android:padding="10dp">
 
-    <TextView
-        android:layout_width="match_parent"
+        <ImageView
+        android:id="@+id/posterPay"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:text="Total : "
-        android:id="@+id/total"
-        android:textSize="30dp"
-        android:fontFamily="@font/nunito_black"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/total"
-        android:text="Rp 250.000"
-        android:id="@+id/totalPay"
-        android:textSize="30dp"
-        android:fontFamily="@font/nunito_black"
-        android:textColor="@color/black"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="10dp"/>
+        app:srcCompat="@drawable/ic_no_image"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="35dp"/>
+
+        <TextView
+            android:id="@+id/judoelPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/posterPay"
+            android:text="TextView"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/descPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/judoelPay"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/posterPay"
+            android:text="TextView" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total : "
+            android:id="@+id/total"
+            android:textSize="30dp"
+            android:fontFamily="@font/nunito_black"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_below="@id/posterPay"/>
+
+        <TextView
+            android:id="@+id/rpPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/total"
+            android:fontFamily="@font/nunito_black"
+            android:text="Rp "
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/totalPay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/total"
+            android:layout_toRightOf="@id/rpPay"
+            android:fontFamily="@font/nunito_black"
+            android:text="250.000"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+    </RelativeLayout>
+
     <Button
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/totalPay"
         android:text="PAY"
         android:id="@+id/btnPay"
         android:textSize="20dp"
@@ -45,17 +85,19 @@
         android:textColor="@color/black"
         android:background="@color/brown3"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="300dp"/>
+        android:layout_marginLeft="300dp"
+        android:layout_below="@id/contIsi"/>
+
     <Button
+        android:id="@+id/btnCancel"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/totalPay"
-        android:text="Cancle"
-        android:id="@+id/btnCancle"
-        android:textSize="20dp"
-        android:fontFamily="@font/nunito_black"
-        android:textColor="@color/black"
-        android:background="@color/Red"
+        android:layout_below="@id/contIsi"
+        android:layout_marginLeft="190dp"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="190dp"/>
+        android:background="@color/Red"
+        android:fontFamily="@font/nunito_black"
+        android:text="Cancel"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 </RelativeLayout>
