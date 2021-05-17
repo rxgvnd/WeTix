@@ -139,7 +139,7 @@
         <Button
             android:id="@+id/saveProf"
             android:layout_width="100dp"
-            android:layout_height="36dp"
+            android:layout_height="50dp"
             android:layout_gravity="right"
             android:layout_marginTop="30dp"
             android:layout_marginRight="40dp"

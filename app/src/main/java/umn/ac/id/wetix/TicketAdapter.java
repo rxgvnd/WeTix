@@ -118,7 +118,7 @@ public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketA
         new AlertDialog.Builder(context)
                 .setTitle("Confirmation")
                 .setMessage(
-                        "Do You Really Want to Cancel This Ticker?")
+                        "Do You Really Want to Cancel This Ticket?")
                 .setPositiveButton(
                         context.getResources().getString(R.string.PostiveYesButton),
                         new DialogInterface.OnClickListener() {

@@ -4,7 +4,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@color/cream2">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -12,14 +13,16 @@
         app:cardCornerRadius="5dp">
 
         <RelativeLayout
-            android:padding="10dp"
+            android:padding="30dp"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/cream2"
+            android:gravity="center">
 
             <EditText
                 android:id="@+id/txTheatreName"
-                android:layout_width="200dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_black"
                 android:inputType="textPersonName"
@@ -30,7 +33,7 @@
 
             <EditText
                 android:id="@+id/txLatitude"
-                android:layout_width="200dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_black"
                 android:hint="Latitude"
@@ -49,7 +52,7 @@
 
             <EditText
                 android:id="@+id/txLongitude"
-                android:layout_width="200dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_black"
                 android:hint="Longitude"
@@ -57,7 +60,7 @@
 
             <EditText
                 android:id="@+id/txHarga"
-                android:layout_width="200dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_black"
                 android:hint="Harga Nonton"
@@ -70,7 +73,8 @@
                 android:text="SAVE"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentBottom="true"
+                android:background="@color/brown2"/>
 
         </RelativeLayout>
 

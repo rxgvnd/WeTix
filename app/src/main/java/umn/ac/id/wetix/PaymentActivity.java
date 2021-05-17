@@ -106,7 +106,7 @@ public class PaymentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if((balanceNew = balanceNow - tempHargaTheat) < 0){
                     balanceNew = balanceNow;
-                    Toast.makeText(PaymentActivity.this, "Uang Ga Cukup Boss", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PaymentActivity.this, "Uang Anda Tidak Cukup, Silahkan TopUp Terlebih Dahulu", Toast.LENGTH_SHORT).show();
                     return;
                 } else if((balanceNew - tempHargaTheat) >= 0) {
                     refSaldo.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(balanceNew).addOnCompleteListener(new OnCompleteListener<Void>() {
