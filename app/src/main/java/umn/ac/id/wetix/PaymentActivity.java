@@ -39,7 +39,7 @@ public class PaymentActivity extends AppCompatActivity {
     DatabaseReference refTheat = FirebaseDatabase.getInstance().getReference("theatres");
     DatabaseReference refSaldo = FirebaseDatabase.getInstance().getReference("UsersBalance");
     DatabaseReference refTiket = FirebaseDatabase.getInstance().getReference("tiket");
-    long tempHargaTheat, balanceNew, balanceNow;
+    long tempHargaTheat, balanceNew, balanceNow, seat_array;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

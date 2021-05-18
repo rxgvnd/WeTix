@@ -38,7 +38,22 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="60dp"
         android:layout_below="@id/spnrBioskop"/>
-
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Seat"
+        android:textSize="30dp"
+        android:layout_below="@id/tv2"
+        android:layout_marginTop="20dp"/>
+    <Spinner
+        android:id="@+id/spnrSeat"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@id/tv3"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="75dp"
+        android:layout_below="@id/spnrTime"/>
     <Button
         android:id="@+id/sbmtButton"
         android:layout_width="wrap_content"

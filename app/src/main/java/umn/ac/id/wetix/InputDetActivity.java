@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputDetActivity extends AppCompatActivity {
-    Spinner spinnerThtr, spinnerTime;
+    Spinner spinnerThtr, spinnerTime, spinnerSeat;
     Button sbmtBtn;
     DatabaseReference ref;
     private String retMovie;
@@ -63,6 +63,12 @@ public class InputDetActivity extends AppCompatActivity {
         R.array.time_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTime.setAdapter(adapter);
+
+        spinnerSeat = findViewById(R.id.spnrSeat);
+        ArrayAdapter<CharSequence> adapters = ArrayAdapter.createFromResource(this,
+                R.array.seat_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerSeat.setAdapter(adapters);
 
         sbmtBtn = findViewById(R.id.sbmtButton);
         sbmtBtn.setOnClickListener(new View.OnClickListener() {
