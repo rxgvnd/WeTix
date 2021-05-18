@@ -55,6 +55,7 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Dashboard.this, ProfileActivity.class));
+                overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
             }
         });
     }

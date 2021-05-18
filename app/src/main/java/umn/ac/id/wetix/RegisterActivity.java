@@ -74,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
             }
         });
 
@@ -83,6 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
             String toastMessage = "Already Logged In, Redirecting . . .";
             Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(),Dashboard.class));
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             finish();
         }
 
@@ -135,6 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                     Toast.makeText(RegisterActivity.this, "User Created.", Toast.LENGTH_SHORT).show();
                                                     Intent intent = new Intent(RegisterActivity.this, Dashboard.class);
                                                     startActivity(intent);
+                                                    overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                                                 }
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
@@ -165,6 +168,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
             }
         });
 

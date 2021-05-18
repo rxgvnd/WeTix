@@ -75,6 +75,7 @@ public class OrderActivity extends AppCompatActivity {
                 Intent intent = new Intent(OrderActivity.this, InputDetActivity.class);
                 intent.putExtra("movie_idx", retMovie);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
         });
     }

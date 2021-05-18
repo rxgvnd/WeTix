@@ -141,7 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(newPassword)) {
                     newName = etName.getText().toString();
                     if(TextUtils.isEmpty(newName)){
-                        etName.setError("Nama gabole kosong");
+                        etName.setError("Nama tidak boleh kosong");
                         return;
                     }
                     UserHelper upUser = new UserHelper();

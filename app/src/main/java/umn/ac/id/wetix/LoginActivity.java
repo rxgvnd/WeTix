@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             String toastMessage = "Already Logged In, Redirecting . . .";
             Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(),Dashboard.class));
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_from_left);
             finish();
         }
 
@@ -52,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
         });
 
@@ -84,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, Dashboard.class));
+                            overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
                         }else {
                             Toast.makeText(LoginActivity.this, "Email or Password is Wrong", Toast.LENGTH_SHORT).show();
                         }
