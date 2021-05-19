@@ -18,15 +18,23 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
+
 public class NewsAdapter extends FirebaseRecyclerAdapter<NewsHelper, NewsAdapter.newsViewholder> {
     Context context;
-    public NewsAdapter(@NonNull FirebaseRecyclerOptions<NewsAdapter> options1, Context context) {
-        super(options1);
+    public NewsAdapter(
+            @NonNull FirebaseRecyclerOptions<NewsHelper> options1,
+            Context context
+    ){
+        super (options1);
         this.context = context;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull newsViewholder holder, int position, @NonNull NewsHelper model) {
+    protected void onBindViewHolder(@NonNull NewsAdapter.newsViewholder holder,
+                                    int position, @NonNull NewsHelper model) {
         Uri uri = Uri.parse(model.getPict());
         Picasso.get().load(uri).into(holder.pict);
         holder.headline.setText(model.getHeadline());
@@ -43,16 +51,23 @@ public class NewsAdapter extends FirebaseRecyclerAdapter<NewsHelper, NewsAdapter
 
     @NonNull
     @Override
-    public newsViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news, parent, false);
+    public newsViewholder
+    onCreateViewHolder(@NonNull ViewGroup parent,
+                       int viewType)
+    {
+        View view
+                = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.news, parent, false);
         return new NewsAdapter.newsViewholder(view);
     }
 
-    public class newsViewholder extends RecyclerView.ViewHolder {
+    public class newsViewholder
+            extends RecyclerView.ViewHolder {
         ImageView pict;
         TextView headline;
         RelativeLayout rtLy;
-        public newsViewholder(@NonNull View itemView) {
+        public newsViewholder(@NonNull View itemView)
+        {
             super(itemView);
             pict = itemView.findViewById(R.id.pictnya);
             headline = itemView.findViewById(R.id.headlinenya);

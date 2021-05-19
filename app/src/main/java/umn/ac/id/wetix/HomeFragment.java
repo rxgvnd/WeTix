@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
         Query news = FirebaseDatabase.getInstance().getReference("listnews");
         newsRV = view.findViewById((R.id.recyclerNews));
         newsRV.setLayoutManager(new LinearLayoutManager(getActivity()));
-        FirebaseRecyclerOptions<NewsAdapter> options1 = new FirebaseRecyclerOptions.Builder<NewsAdapter>()
+        FirebaseRecyclerOptions<NewsHelper> options1 = new FirebaseRecyclerOptions.Builder<NewsHelper>()
                 .setQuery(news, NewsHelper.class)
                 .build();
         adapter1 = new NewsAdapter(options1, getContext());
