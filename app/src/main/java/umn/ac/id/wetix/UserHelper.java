@@ -2,12 +2,10 @@ package umn.ac.id.wetix;
 
 public class UserHelper {
     String name, email, bday, password, conPassword;
-    int balance;
 
     public UserHelper(){}
 
-    public UserHelper(int balance, String name, String bday, String email, String password) {
-        this.balance = balance;
+    public UserHelper(String name, String bday, String email, String password) {
         this.name = name;
         this.email = email;
         this.bday = bday;
@@ -20,14 +18,6 @@ public class UserHelper {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
     }
 
     public String getBday() {

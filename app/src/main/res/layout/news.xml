@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rLay"
+    android:id="@+id/rLayNews"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="120dp"
     android:clickable="true"
     android:focusable="true"
     android:gravity="center_horizontal"
@@ -12,9 +12,10 @@
 
     <ImageView
         android:id="@+id/pictnya"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_no_image"/>
+        android:backgroundTint="#00FFFFFF"
+        android:src="@drawable/ic_no_image" />
 
     <TextView
         android:id="@+id/headlinenya"
@@ -22,6 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/pictnya"
         android:text="Headline"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
 </RelativeLayout>

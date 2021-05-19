@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    DatabaseReference ref;
+    DatabaseReference refMov;
     private RecyclerView movieRV, newsRV;
     MovieAdapter adapter;
     NewsAdapter adapter1;
@@ -43,35 +43,13 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        ref = FirebaseDatabase.getInstance().getReference("listmovie");
-        Query query = FirebaseDatabase.getInstance().getReference("listmovie");
-        movieRV = view.findViewById((R.id.recyclerNowPlaying));
-        movieRV.setLayoutManager(new LinearLayoutManager(getActivity()));
-        FirebaseRecyclerOptions<MovieHelper> options = new FirebaseRecyclerOptions.Builder<MovieHelper>()
-                .setQuery(query, MovieHelper.class)
-                .build();
-        adapter = new MovieAdapter(options, getContext());
-        movieRV.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false
-        ));
-        movieRV.setAdapter(adapter);
-
-        ref = FirebaseDatabase.getInstance().getReference("listnews");
-        Query news = FirebaseDatabase.getInstance().getReference("listnews");
-        newsRV = view.findViewById((R.id.recyclerNews));
-        newsRV.setLayoutManager(new LinearLayoutManager(getActivity()));
-        FirebaseRecyclerOptions<NewsHelper> options1 = new FirebaseRecyclerOptions.Builder<NewsHelper>()
-                .setQuery(news, NewsHelper.class)
-                .build();
-        adapter1 = new NewsAdapter(options1, getContext());
-        newsRV.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        newsRV.setAdapter(adapter1);
-
-
+        //karusel
+        refMov = FirebaseDatabase.getInstance().getReference("listmovie");
         ImageSlider imageSlider = (ImageSlider) view.findViewById(R.id.slider);
         List<SlideModel> imageList = new ArrayList<>();
         for(int i = 1; i < 6; i++){
             String idx = "movie"+i;
-            ref.child(idx).addValueEventListener(new ValueEventListener() {
+            refMov.child(idx).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                     MovieHelper movie = snapshot.getValue(MovieHelper.class);
@@ -87,14 +65,37 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
+
+        //card
+        Query query = FirebaseDatabase.getInstance().getReference("listmovie");
+        FirebaseRecyclerOptions<MovieHelper> options = new FirebaseRecyclerOptions.Builder<MovieHelper>()
+                .setQuery(query, MovieHelper.class)
+                .build();
+        adapter = new MovieAdapter(options, getContext());
+        movieRV = view.findViewById((R.id.recyclerNowPlaying));
+        movieRV.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false
+        ));
+        movieRV.setAdapter(adapter);
+
+        //listnews
+        FirebaseRecyclerOptions<NewsHelper> options1 = new FirebaseRecyclerOptions.Builder<NewsHelper>()
+                .setQuery(FirebaseDatabase.getInstance().getReference("listnews"),
+                        NewsHelper.class)
+                .build();
+        adapter1 = new NewsAdapter(options1, getContext());
+        newsRV = view.findViewById((R.id.recyclerNews));
+        newsRV.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        newsRV.setAdapter(adapter1);
+
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (adapter != null) {
+        if ((adapter != null) || (adapter1 != null)) {
             adapter.startListening();
+            adapter1.startListening();
         }
 
     }
@@ -102,8 +103,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (adapter != null) {
+        if ((adapter != null) || (adapter1 != null)) {
             adapter.stopListening();
+            adapter1.stopListening();
         }
     }
 }

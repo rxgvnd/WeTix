@@ -78,9 +78,12 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 TheatreHelper theatre = snapshot.getValue(TheatreHelper.class);
-                NumberFormat formatter = new DecimalFormat("#,###");
                 tempHargaTheat = theatre.getHarga();
-                String hargaTheat = formatter.format(tempHargaTheat);
+                String jumlaKursi = getIntent().getExtras().get("seat").toString();
+                long totalharga = Long.parseLong(jumlaKursi) * tempHargaTheat;
+
+                NumberFormat formatter = new DecimalFormat("#,###");
+                String hargaTheat = formatter.format(totalharga);
                 totalPay.setText(hargaTheat);
             }
 

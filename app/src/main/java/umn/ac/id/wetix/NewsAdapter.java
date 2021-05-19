@@ -71,7 +71,7 @@ public class NewsAdapter extends FirebaseRecyclerAdapter<NewsHelper, NewsAdapter
             super(itemView);
             pict = itemView.findViewById(R.id.pictnya);
             headline = itemView.findViewById(R.id.headlinenya);
-            rtLy = itemView.findViewById(R.id.rLay);
+            rtLy = itemView.findViewById(R.id.rLayNews);
         }
     }
 }

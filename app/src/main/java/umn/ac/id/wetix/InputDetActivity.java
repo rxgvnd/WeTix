@@ -78,6 +78,7 @@ public class InputDetActivity extends AppCompatActivity {
                 intent.putExtra("movie_idx", getIntent().getExtras().get("movie_idx").toString());
                 intent.putExtra("time", spinnerTime.getSelectedItem().toString());
                 intent.putExtra("theatre", spinnerThtr.getSelectedItem().toString());
+                intent.putExtra("seat", spinnerSeat.getSelectedItem().toString());
                 startActivity(intent);
             }
         });

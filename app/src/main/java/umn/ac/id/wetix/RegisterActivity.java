@@ -59,8 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
         TxConPassword = findViewById(R.id.txConPassword);
         BtnRegister = findViewById(R.id.btnRegister);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-        tvBday = (TextView) findViewById(R.id.tv_dateresult);
-        btDatePicker = (ImageButton) findViewById(R.id.bt_datepicker);
+        tvBday = findViewById(R.id.tv_dateresult);
+        btDatePicker = findViewById(R.id.bt_datepicker);
         btDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +96,6 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = TxPassword.getText().toString().trim();
                 String conPassword = TxConPassword.getText().toString().trim();
                 String bday = tvBday.getText().toString().trim();
-                int balance = 0;
                 reference = FirebaseDatabase.getInstance().getReference("users");
 
                 if(TextUtils.isEmpty(email)){
@@ -124,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            UserHelper userModel = new UserHelper(balance, name, bday, email, password);
+                            UserHelper userModel = new UserHelper(name, bday, email, password);
                             reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

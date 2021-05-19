@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/profile_tool"
-        layout="@layout/profile_toolbar" />
+        layout="@layout/toolbar_def" />
 
     <LinearLayout
         android:layout_width="match_parent"

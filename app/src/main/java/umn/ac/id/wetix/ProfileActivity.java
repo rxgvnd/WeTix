@@ -70,8 +70,8 @@ public class ProfileActivity extends AppCompatActivity {
         etName = findViewById(R.id.txName);
         txEmail = findViewById(R.id.txEmail);
         etPass = findViewById(R.id.txChangePass);
-        txBday = (TextView) findViewById(R.id.prof_tvdateresult);
-        btDatePicker = (ImageButton) findViewById(R.id.prof_bt_datepicker);
+        txBday = findViewById(R.id.prof_tvdateresult);
+        btDatePicker = findViewById(R.id.prof_bt_datepicker);
         btDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,6 +145,7 @@ public class ProfileActivity extends AppCompatActivity {
                         return;
                     }
                     UserHelper upUser = new UserHelper();
+                    newBday = txBday.getText().toString();
                     newPict = filePath;
                     upUser.setEmail(email);
                     upUser.setName(newName);
