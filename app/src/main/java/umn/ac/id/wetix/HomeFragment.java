@@ -32,8 +32,9 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     DatabaseReference ref;
-    private RecyclerView movieRV;
+    private RecyclerView movieRV, newsRV;
     MovieAdapter adapter;
+    NewsAdapter adapter1;
 
     public HomeFragment(){}
 
@@ -53,6 +54,18 @@ public class HomeFragment extends Fragment {
         movieRV.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false
         ));
         movieRV.setAdapter(adapter);
+
+        ref = FirebaseDatabase.getInstance().getReference("listnews");
+        Query news = FirebaseDatabase.getInstance().getReference("listnews");
+        newsRV = view.findViewById((R.id.recyclerNews));
+        newsRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+        FirebaseRecyclerOptions<NewsAdapter> options1 = new FirebaseRecyclerOptions.Builder<NewsAdapter>()
+                .setQuery(news, NewsHelper.class)
+                .build();
+        adapter1 = new NewsAdapter(options1, getContext());
+        newsRV.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        newsRV.setAdapter(adapter1);
+
 
         ImageSlider imageSlider = (ImageSlider) view.findViewById(R.id.slider);
         List<SlideModel> imageList = new ArrayList<>();
