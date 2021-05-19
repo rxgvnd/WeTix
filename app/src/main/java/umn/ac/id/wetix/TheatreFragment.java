@@ -95,7 +95,7 @@ public class TheatreFragment extends Fragment implements LocationListener {
         FirebaseRecyclerOptions<TheatreHelper> options = new FirebaseRecyclerOptions.Builder<TheatreHelper>()
                 .setQuery(query, TheatreHelper.class)
                 .build();
-        adapter = new TheatreAdapter(options, currLati, currLongi);
+        adapter = new TheatreAdapter(options, currLati, currLongi, getContext());
         theatreRV.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false
         ));
         theatreRV.setAdapter(adapter);
@@ -104,14 +104,7 @@ public class TheatreFragment extends Fragment implements LocationListener {
     }
 
     @Override
-    public void onLocationChanged(@NonNull Location location) {
-//        currLati = location.getLatitude();
-//        currLongi = location.getLongitude();
-//        NumberFormat nm = NumberFormat.getNumberInstance();
-//        curlat.setText(nm.format(location.getLatitude()));
-//        curlong.setText(nm.format(location.getLongitude()));
-//        Log.d("currloc", currLat + ", " + currLong);
-    }
+    public void onLocationChanged(@NonNull Location location) {}
 
     @Override
     public void onStart() {

@@ -1,9 +1,13 @@
 package umn.ac.id.wetix;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,12 +22,14 @@ import static java.lang.Math.round;
 
 public class TheatreAdapter extends FirebaseRecyclerAdapter<TheatreHelper, TheatreAdapter.theatresViewholder> {
     public double lat1, lng1, rad = 6372800;
+    Context context;
     public TheatreAdapter(
-            @NonNull FirebaseRecyclerOptions<TheatreHelper> options, double currLat, double currLong
+            @NonNull FirebaseRecyclerOptions<TheatreHelper> options, double currLat, double currLong, Context context
     ){
         super (options);
         this.lat1 = currLat;
         this.lng1 = currLong;
+        this.context = context;
     }
 
     @Override
@@ -48,6 +54,17 @@ public class TheatreAdapter extends FirebaseRecyclerAdapter<TheatreHelper, Theat
             String dist = Double.toString(tempDist);
             holder.jarak.setText(dist + " Meter");
         }
+        holder.pencetan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (context, MapsActivity.class);
+                intent.putExtra("name", model.getItsName());
+                intent.putExtra("lat", model.getLatitude());
+                intent.putExtra("long", model. getLongitude());
+                intent.putExtra("fromAct", "TheatreFragment");
+                context.startActivity(intent);
+            }
+        });
     }
 
     @NonNull
@@ -63,10 +80,12 @@ public class TheatreAdapter extends FirebaseRecyclerAdapter<TheatreHelper, Theat
     }
     class theatresViewholder extends RecyclerView.ViewHolder{
         TextView theatreName, jarak;
+        RelativeLayout pencetan;
         public theatresViewholder(@NonNull View itemView){
             super(itemView);
             theatreName = itemView.findViewById(R.id.namaBioskop);
             jarak = itemView.findViewById(R.id.jarak);
+            pencetan = itemView.findViewById(R.id.pencetan);
         }
     }
 }

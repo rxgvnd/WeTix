@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +36,7 @@ import org.jetbrains.annotations.NotNull;
 public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketAdapter.ticketViewholder> {
     DatabaseReference refMovie = FirebaseDatabase.getInstance().getReference("listmovie");
     DatabaseReference refTheat = FirebaseDatabase.getInstance().getReference("theatres");
+    DatabaseReference refTiket = FirebaseDatabase.getInstance().getReference("tiket");
     FirebaseFirestore db;
     Context context;
 
@@ -125,23 +127,18 @@ public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketA
                             public void onClick(DialogInterface dialog,
                                                 int which) {
                                 //Do Something Here
-                                db.collection("tiket").
-                                        document(id).
-                                        delete().
-                                        addOnCompleteListener(new OnCompleteListener<Void>() {
+                                Log.d("test",id);
+                                refTiket.child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Log.d("test",id);
-                                                    // this method is called when the task is success
-                                                    // after deleting we are starting our MainActivity.
                                                     Toast.makeText(context, "Ticket Cancelled", Toast.LENGTH_SHORT).show();
-                                                    Intent i = new Intent(context, Dashboard.class);
-                                                    context.startActivity(i);
                                                 }
-                                                {
-                                                    Toast.makeText(context, "Fail to cancel.", Toast.LENGTH_SHORT).show();
-                                                }
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.d("error : ", "onFailure: " + e.toString());
                                             }
                                         });
                             }

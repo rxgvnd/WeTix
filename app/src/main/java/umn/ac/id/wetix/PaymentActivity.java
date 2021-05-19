@@ -116,7 +116,6 @@ public class PaymentActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-
                                 TicketHelper tiket = new TicketHelper(retMovie, tempHargaTheat, waktu, retTheatre, uid);
                                 refTiket.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(getSaltString()).setValue(tiket).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override

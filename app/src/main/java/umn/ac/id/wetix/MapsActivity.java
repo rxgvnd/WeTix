@@ -9,6 +9,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -53,11 +54,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         enableMyLocation();
-
-        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        String from = getIntent().getExtras().get("fromAct").toString();
+//        Log.d("test",from);
+        if(from.equals("TheatreFragment")){
+            double lati = Double.parseDouble(getIntent().getExtras().get("lat").toString());
+            double longi = Double.parseDouble(getIntent().getExtras().get("long").toString());
+            LatLng now = new LatLng(lati, longi);
+            mMap.addMarker(new MarkerOptions().position(now).title("Bioskop " + getIntent().getExtras().get("name").toString()));
+            float zoomLevel = 16.0f; //This goes up to 21
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(now, zoomLevel));
+        }
         setMapLongClick(mMap);
     }
 
