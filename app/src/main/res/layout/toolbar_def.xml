@@ -8,5 +8,4 @@
     android:elevation="4dp"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:title="WeTix">
-
 </androidx.appcompat.widget.Toolbar>

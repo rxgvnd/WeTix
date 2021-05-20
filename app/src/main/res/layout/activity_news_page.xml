@@ -19,14 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:id="@+id/PosterNews"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="65dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Judul"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:fontFamily="@font/nunito_black"
             android:textColor="@color/black"
             android:gravity="center"
@@ -35,17 +35,34 @@
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginTop="20dp"/>
-        <TextView
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Berita"
-            android:fontFamily="@font/nunito_black"
-            android:textColor="@color/black"
             android:layout_below="@+id/judul"
-            android:id="@+id/IsiNews"
-            android:layout_marginTop="30dp"
+            android:id="@+id/SVBerita">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Berita"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:layout_below="@+id/judul"
+                android:id="@+id/IsiNews"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:textSize="20dp"/>
+        </ScrollView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@+id/PosterNews"
+            android:text="Back"
+            android:textSize="20dp"
+            android:id="@+id/btnBackHome"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:textSize="20dp"/>
+            android:background="@color/brown2"/>
     </RelativeLayout>
 </RelativeLayout>
