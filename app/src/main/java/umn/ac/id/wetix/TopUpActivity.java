@@ -115,6 +115,8 @@ public class TopUpActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         toProfile = findViewById(R.id.toProfile);
         toProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,5 +126,15 @@ public class TopUpActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
 }
