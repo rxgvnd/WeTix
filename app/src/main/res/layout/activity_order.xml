@@ -6,68 +6,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrderActivity"
-    android:padding="10dp"
     android:background="@color/cream">
 
-    <ImageView
-        android:id="@+id/poster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_no_image"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="35dp" />
+    <include
+        android:id="@+id/order_tool"
+        layout="@layout/toolbar_def" />
 
-    <TextView
-        android:id="@+id/judoel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/poster"
-        android:layout_marginStart="10dp"
-        android:text="TextView"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:layout_below="@+id/order_tool">
 
-    <TextView
-        android:id="@+id/durasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/judoel"
-        android:layout_toEndOf="@id/poster"
-        android:text="TextView"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"/>
+        <ImageView
+            android:id="@+id/poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_no_image"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="35dp" />
 
-    <TextView
-        android:id="@+id/year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/poster"
-        android:layout_below="@id/durasi"
-        android:text="TextView"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/judoel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/poster"
+            android:layout_marginStart="10dp"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
 
-    <TextView
-        android:id="@+id/descr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/poster"
-        android:text="TextView"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp" />
+        <TextView
+            android:id="@+id/durasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/judoel"
+            android:layout_toEndOf="@id/poster"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"/>
 
-    <Button
-        android:id="@+id/btnOrdr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:text="order"
-        android:textColor="@color/black"
-        android:background="@color/brown2"/>
+        <TextView
+            android:id="@+id/year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/poster"
+            android:layout_below="@id/durasi"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/descr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/poster"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/btnOrdr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:text="order"
+            android:textColor="@color/black"
+            android:background="@color/brown2"/>
+    </RelativeLayout>
+
 </RelativeLayout>
