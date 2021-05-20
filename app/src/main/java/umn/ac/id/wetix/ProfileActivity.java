@@ -175,6 +175,19 @@ public class ProfileActivity extends AppCompatActivity {
         });
     Toolbar toolbar = findViewById(R.id.profile_tool);
     setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private void SelectImage()
