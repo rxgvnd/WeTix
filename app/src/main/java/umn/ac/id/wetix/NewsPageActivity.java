@@ -2,6 +2,7 @@ package umn.ac.id.wetix;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -33,15 +34,6 @@ public class NewsPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_page);
 
-        btnBackHome = (Button)findViewById(R.id.btnBackHome);
-
-        btnBackHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(NewsPageActivity.this, Dashboard.class);
-                startActivity(intent);
-            }
-        });
         PosterNews = findViewById(R.id.PosterNews);
         judul = findViewById(R.id.judul);
         IsiNews = findViewById(R.id.IsiNews);
@@ -68,5 +60,21 @@ public class NewsPageActivity extends AppCompatActivity {
 
             }
         });
+
+        Toolbar toolbar = findViewById(R.id.news_tool);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
