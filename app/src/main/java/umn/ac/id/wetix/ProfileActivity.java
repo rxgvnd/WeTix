@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -23,9 +25,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,9 +58,10 @@ public class ProfileActivity extends AppCompatActivity {
     EditText etName, etPass;
     TextView txEmail, txBalance, txBday;
     Button saveProfile;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference reference, refSaldo;
     StorageReference upImageRef;
-    String name, newName, email, password, newPassword, newBday;
+    String name, newName, email, newPassword, newBday;
     long balance;
     private Uri filePath, newPict;
 
@@ -70,6 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
         etName = findViewById(R.id.txName);
         txEmail = findViewById(R.id.txEmail);
         etPass = findViewById(R.id.txChangePass);
+        etPass.setError("Input new password if you want to change it!");
         txBday = findViewById(R.id.prof_tvdateresult);
         btDatePicker = findViewById(R.id.prof_bt_datepicker);
         btDatePicker.setOnClickListener(new View.OnClickListener() {
@@ -90,13 +97,15 @@ public class ProfileActivity extends AppCompatActivity {
         upImageRef = FirebaseStorage.getInstance().getReference("usersProfPic");
         refSaldo = FirebaseDatabase.getInstance().getReference("UsersBalance");
 
-        StorageReference profPicRef = upImageRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        profPicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).resize(600,600).into(profpic);
-            }
-        });
+        if(upImageRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()) != null) {
+            StorageReference profPicRef = upImageRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            profPicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Picasso.get().load(uri).resize(600, 600).into(profpic);
+                }
+            });
+        }
 
         reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -106,8 +115,6 @@ public class ProfileActivity extends AppCompatActivity {
                 email = user.getEmail();
                 name = user.getName();
                 newBday = user.getBday();
-                password = user.getPassword();
-
                 txEmail.setText(email);
                 etName.setText(name);
                 txBday.setText(newBday);
@@ -149,9 +156,7 @@ public class ProfileActivity extends AppCompatActivity {
                     newPict = filePath;
                     upUser.setEmail(email);
                     upUser.setName(newName);
-//                    upUser.setBalance(balance);
                     upUser.setBday(newBday);
-                    upUser.setPassword(password);
                     updateUser(upUser, newPict);
                 } else if(!(TextUtils.isEmpty(newPassword))) {
                     newName = etName.getText().toString();
@@ -160,16 +165,46 @@ public class ProfileActivity extends AppCompatActivity {
                         etPass.setError("Password Must be >= 6 Characters");
                         return;
                     }
-                    UserHelper upUser = new UserHelper();
-                    newPict = filePath;
-                    upUser.setEmail(email);
-                    upUser.setName(newName);
-//                    upUser.setBalance(balance);
-                    upUser.setBday(newBday);
-                    upUser.setPassword(newPassword);
-//                    ConfPass confPass = new ConfPass();
-//                    confPass.showPopupWindow(view, upUser, newPict, password);
-                    updateUser(upUser, newPict);
+                    new AlertDialog.Builder(view.getContext())
+                            .setTitle("Confirmation")
+                            .setMessage(
+                                    "Do You Really Want to Change Your Password?")
+                            .setPositiveButton(
+                                    getResources().getString(R.string.PostiveYesButton),
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog,
+                                                            int which) {
+                                            //Do Something Here
+                                            user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Toast.makeText(ProfileActivity.this, "Password Changed", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull @NotNull Exception e) {
+                                                    Toast.makeText(ProfileActivity.this, "Password Reset Failed", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                            UserHelper upUser = new UserHelper();
+                                            newPict = filePath;
+                                            upUser.setEmail(email);
+                                            upUser.setName(newName);
+                                            upUser.setBday(newBday);
+                                            updateUser(upUser, newPict);
+                                        }
+                                    })
+                            .setNegativeButton(
+                                    getResources().getString(R.string.NegativeNoButton),
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog,
+                                                            int which) {
+                                            return;
+                                        }
+                                    }).show();
+
                 }
             }
         });

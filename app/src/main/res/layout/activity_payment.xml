@@ -6,14 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".PaymentActivity"
     android:background="@color/cream2">
+
     <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"
-        />
+        android:id="@+id/pay_tool"
+        layout="@layout/toolbar_def" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/pay_tool"
         android:id="@+id/contIsi"
         android:padding="10dp">
 

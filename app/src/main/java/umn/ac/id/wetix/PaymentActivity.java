@@ -39,7 +39,7 @@ public class PaymentActivity extends AppCompatActivity {
     DatabaseReference refTheat = FirebaseDatabase.getInstance().getReference("theatres");
     DatabaseReference refSaldo = FirebaseDatabase.getInstance().getReference("UsersBalance");
     DatabaseReference refTiket = FirebaseDatabase.getInstance().getReference("tiket");
-    long tempHargaTheat, balanceNew, balanceNow, seat_array;
+    long tempHargaTheat, balanceNew, balanceNow, totalharga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,6 @@ public class PaymentActivity extends AppCompatActivity {
         jmlKursi.setText(jumlaKursi);
         totalPay = findViewById(R.id.totalPay);
         payBtn = findViewById(R.id.btnPay);
-        Log.d("theatre", retTheatre);
 
         refMovie.child(retMovie).addValueEventListener(new ValueEventListener() {
             @Override
@@ -82,7 +81,7 @@ public class PaymentActivity extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 TheatreHelper theatre = snapshot.getValue(TheatreHelper.class);
                 tempHargaTheat = theatre.getHarga();
-                long totalharga = Long.parseLong(jumlaKursi) * tempHargaTheat;
+                totalharga = Long.parseLong(jumlaKursi) * tempHargaTheat;
                 NumberFormat formatter = new DecimalFormat("#,###");
                 String hargaTheat = formatter.format(totalharga);
                 totalPay.setText(hargaTheat);
@@ -108,12 +107,11 @@ public class PaymentActivity extends AppCompatActivity {
         payBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if((balanceNew = balanceNow - tempHargaTheat) < 0){
-                    balanceNew = balanceNow;
+                if((balanceNow - totalharga) < 0){
                     Toast.makeText(PaymentActivity.this, "Uang Anda Tidak Cukup, Silahkan TopUp Terlebih Dahulu", Toast.LENGTH_SHORT).show();
                     return;
-                } else if((balanceNew - tempHargaTheat) >= 0) {
-                    refSaldo.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(balanceNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                } else if((balanceNow - totalharga) >= 0) {
+                    refSaldo.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(balanceNow - totalharga).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -125,6 +123,7 @@ public class PaymentActivity extends AppCompatActivity {
                                             Toast.makeText(PaymentActivity.this, "Payment Complete", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                                             startActivity(intent);
+                                            finish();
                                         }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {

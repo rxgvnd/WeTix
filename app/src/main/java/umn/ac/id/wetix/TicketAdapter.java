@@ -81,9 +81,10 @@ public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketA
         refTiket.child(model.getUid()).child(getRef(position).getKey()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                TicketHelper tiket = snapshot.getValue(TicketHelper.class);
-//                Log.d("test", tiket.getBioskop());
-                holder.jmlSeat.setText(Long.toString(tiket.getJmlKursi()));
+                if (snapshot.exists()) {
+                    TicketHelper tiket = snapshot.getValue(TicketHelper.class);
+                    holder.jmlSeat.setText(Long.toString(tiket.getJmlKursi()));
+                }
             }
 
             @Override
@@ -142,23 +143,21 @@ public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketA
                             public void onClick(DialogInterface dialog,
                                                 int which) {
                                 //Do Something Here
-                                Log.d("test",id);
                                 refTiket.child(uid).child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     Toast.makeText(context, "Ticket Cancelled", Toast.LENGTH_SHORT).show();
-                                                    context.startActivity(new Intent(context, Dashboard.class));
                                                 }
                                             }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.d("error : ", "onFailure: " + e.toString());
-                                            }
-                                        });
-                            }
-                        })
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.d("error : ", "onFailure: " + e.toString());
+                                                }
+                                            });
+                                }
+                            })
                 .setNegativeButton(
                         context.getResources().getString(R.string.NegativeNoButton),
                         new DialogInterface.OnClickListener() {

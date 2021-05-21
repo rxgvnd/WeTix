@@ -36,7 +36,6 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
-
         poster = findViewById(R.id.poster);
         judoel = findViewById(R.id.judoel);
         durasi = findViewById(R.id.durasi);
@@ -44,7 +43,6 @@ public class OrderActivity extends AppCompatActivity {
         year = findViewById(R.id.year);
         ordr = findViewById(R.id.btnOrdr);
         retMovie = getIntent().getExtras().get("movie_idx").toString();
-        Log.d("this", retMovie);
 
         ref.child(retMovie).addValueEventListener(new ValueEventListener() {
             @Override
