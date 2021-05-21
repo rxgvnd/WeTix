@@ -37,6 +37,7 @@ public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketA
     DatabaseReference refMovie = FirebaseDatabase.getInstance().getReference("listmovie");
     DatabaseReference refTheat = FirebaseDatabase.getInstance().getReference("theatres");
     DatabaseReference refTiket = FirebaseDatabase.getInstance().getReference("tiket");
+    //DatabaseReference refTotal = FirebaseDatabase.getInstance().getReference("totalseat");
     FirebaseFirestore db;
     Context context;
 
@@ -77,14 +78,26 @@ public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketA
 
             }
         });
+        //refTotal.child(model.GetTotSeat()).addValueEventListener(new ValueEventListener() {
+        //    @Override
+        //    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+        //        TicketHelper Total = snapshot.getValue(TicketHelper.class);
+        //        holder.TotSeat.setText(Total.GetTotSeat() + " Seat");
+        //    }
+
+        //    @Override
+        //    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+        //    }
+       // });
         holder.waktu.setText("Pukul " + model.getWaktu());
 
-        holder.cncl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog(model, getRef(position).getKey());
-            }
-        });
+        //holder.cncl.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //        showDialog(model, getRef(position).getKey());
+        //    }
+        //});
 
         db = FirebaseFirestore.getInstance();
     }
@@ -102,16 +115,17 @@ public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketA
     }
 
     class ticketViewholder extends RecyclerView.ViewHolder{
-        TextView judul, nama, waktu;
+        TextView judul, nama, waktu,TotSeat;
         ImageView poster;
-        Button cncl;
+        //Button cncl;
         public ticketViewholder(@NonNull View itemView){
             super(itemView);
             poster = itemView.findViewById(R.id.posterTiket);
             judul = itemView.findViewById(R.id.JudulFilm);
             nama = itemView.findViewById(R.id.namaBioskop);
             waktu = itemView.findViewById(R.id.waktu);
-            cncl = itemView.findViewById(R.id.cnclButton);
+            //TotSeat = itemView.findViewById(R.id.TotSeat);
+            //cncl = itemView.findViewById(R.id.cnclButton);
         }
     }
 

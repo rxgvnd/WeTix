@@ -41,30 +41,34 @@
             android:layout_height="wrap_content"
             android:text="Bioskop"
             android:layout_centerVertical="true"
+            android:layout_below="@+id/JudulFilm"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="37dp"
             android:textStyle="bold"
             android:layout_toRightOf="@+id/posterTiket"/>
-
+ <!--       <TextView
+            android:id="@+id/TotSeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Seat"
+            android:layout_centerVertical="true"
+            android:layout_below="@+id/namaBioskop"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/posterTiket"/> -->
         <TextView
             android:id="@+id/waktu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/posterTiket"
             android:text="Waktu"
+            android:layout_marginTop="37dp"
             android:layout_marginStart="10dp"
-            android:textStyle="bold"
-            android:layout_alignParentBottom="true"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="10dp"
+            android:layout_below="@+id/namaBioskop"
+            android:textStyle="bold"/>
 
-        <Button
-            android:id="@+id/cnclButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="105dp"
-            android:layout_marginEnd="10dp"
-            android:background="@color/brown2"
-            android:text="Cancel" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -1,7 +1,7 @@
 package umn.ac.id.wetix;
 
 public class TicketHelper {
-    String idMovie, waktu, bioskop, uid;
+    String idMovie, waktu, bioskop, uid, TotSeat;
     long harga;
 
     public TicketHelper(){}
@@ -12,6 +12,7 @@ public class TicketHelper {
         this.waktu = waktu;
         this.bioskop = bioskop;
         this.uid = uid;
+      //  this.TotSeat = TotSeat;
     }
 
     public String getIdMovie() {
@@ -53,4 +54,6 @@ public class TicketHelper {
     public void setUid(String uid) {
         this.uid = uid;
     }
+
+    //public String GetTotSeat() { return TotSeat; }
 }
