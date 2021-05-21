@@ -47,16 +47,31 @@
             android:text="TextView" />
 
         <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/posterPay"
+            android:text="Jumlah Kursi Dipesan : " />
+
+        <TextView
+            android:id="@+id/jmlKursi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/posterPay"
+            android:layout_toRightOf="@id/textView4"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total : "
-            android:id="@+id/total"
-            android:textSize="30dp"
+            android:layout_below="@id/jmlKursi"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/nunito_black"
+            android:text="Total : "
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_below="@id/posterPay"/>
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/rpPay"

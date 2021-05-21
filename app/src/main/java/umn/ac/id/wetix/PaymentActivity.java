@@ -33,7 +33,7 @@ import java.util.Random;
 public class PaymentActivity extends AppCompatActivity {
     private String retMovie, retTheatre, waktu, uid;
     ImageView poster;
-    TextView judoel, desc, totalPay;
+    TextView judoel, desc, jmlKursi, totalPay;
     Button payBtn, cancelBtn;
     DatabaseReference refMovie = FirebaseDatabase.getInstance().getReference("listmovie");
     DatabaseReference refTheat = FirebaseDatabase.getInstance().getReference("theatres");
@@ -47,11 +47,14 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment);
         retMovie = getIntent().getExtras().get("movie_idx").toString();
         retTheatre = getIntent().getExtras().get("theatre").toString();
+        String jumlaKursi = getIntent().getExtras().get("seat").toString();
         waktu = getIntent().getExtras().get("time").toString();
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         poster = findViewById(R.id.posterPay);
         judoel = findViewById(R.id.judoelPay);
         desc = findViewById(R.id.descPay);
+        jmlKursi = findViewById(R.id.jmlKursi);
+        jmlKursi.setText(jumlaKursi);
         totalPay = findViewById(R.id.totalPay);
         payBtn = findViewById(R.id.btnPay);
         Log.d("theatre", retTheatre);
@@ -79,9 +82,7 @@ public class PaymentActivity extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 TheatreHelper theatre = snapshot.getValue(TheatreHelper.class);
                 tempHargaTheat = theatre.getHarga();
-                String jumlaKursi = getIntent().getExtras().get("seat").toString();
                 long totalharga = Long.parseLong(jumlaKursi) * tempHargaTheat;
-
                 NumberFormat formatter = new DecimalFormat("#,###");
                 String hargaTheat = formatter.format(totalharga);
                 totalPay.setText(hargaTheat);
@@ -116,7 +117,7 @@ public class PaymentActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                TicketHelper tiket = new TicketHelper(retMovie, tempHargaTheat, waktu, retTheatre, uid);
+                                TicketHelper tiket = new TicketHelper(retMovie, tempHargaTheat, waktu, retTheatre, uid, Long.parseLong(jumlaKursi));
                                 refTiket.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(getSaltString()).setValue(tiket).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {

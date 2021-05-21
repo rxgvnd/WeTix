@@ -37,7 +37,6 @@ public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketA
     DatabaseReference refMovie = FirebaseDatabase.getInstance().getReference("listmovie");
     DatabaseReference refTheat = FirebaseDatabase.getInstance().getReference("theatres");
     DatabaseReference refTiket = FirebaseDatabase.getInstance().getReference("tiket");
-    //DatabaseReference refTotal = FirebaseDatabase.getInstance().getReference("totalseat");
     FirebaseFirestore db;
     Context context;
 
@@ -78,27 +77,29 @@ public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketA
 
             }
         });
-        //refTotal.child(model.GetTotSeat()).addValueEventListener(new ValueEventListener() {
-        //    @Override
-        //    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-        //        TicketHelper Total = snapshot.getValue(TicketHelper.class);
-        //        holder.TotSeat.setText(Total.GetTotSeat() + " Seat");
-        //    }
 
-        //    @Override
-        //    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+        refTiket.child(model.getUid()).child(getRef(position).getKey()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                TicketHelper tiket = snapshot.getValue(TicketHelper.class);
+//                Log.d("test", tiket.getBioskop());
+                holder.jmlSeat.setText(Long.toString(tiket.getJmlKursi()));
+            }
 
-        //    }
-       // });
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
         holder.waktu.setText("Pukul " + model.getWaktu());
 
-        //holder.cncl.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        showDialog(model, getRef(position).getKey());
-        //    }
-        //});
-
+        holder.cncl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(model, getRef(position).getKey(), model.getUid());
+            }
+        });
         db = FirebaseFirestore.getInstance();
     }
 
@@ -115,21 +116,21 @@ public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketA
     }
 
     class ticketViewholder extends RecyclerView.ViewHolder{
-        TextView judul, nama, waktu,TotSeat;
+        TextView judul, nama, waktu, jmlSeat;
         ImageView poster;
-        //Button cncl;
+        Button cncl;
         public ticketViewholder(@NonNull View itemView){
             super(itemView);
             poster = itemView.findViewById(R.id.posterTiket);
             judul = itemView.findViewById(R.id.JudulFilm);
             nama = itemView.findViewById(R.id.namaBioskop);
             waktu = itemView.findViewById(R.id.waktu);
-            //TotSeat = itemView.findViewById(R.id.TotSeat);
-            //cncl = itemView.findViewById(R.id.cnclButton);
+            jmlSeat = itemView.findViewById(R.id.jmlSeat);
+            cncl = itemView.findViewById(R.id.cnclButton);
         }
     }
 
-    private void showDialog(TicketHelper toDel, String id) throws Resources.NotFoundException {
+    private void showDialog(TicketHelper toDel, String id, String uid) throws Resources.NotFoundException {
         new AlertDialog.Builder(context)
                 .setTitle("Confirmation")
                 .setMessage(
@@ -142,11 +143,12 @@ public class TicketAdapter extends FirebaseRecyclerAdapter<TicketHelper, TicketA
                                                 int which) {
                                 //Do Something Here
                                 Log.d("test",id);
-                                refTiket.child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                refTiket.child(uid).child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     Toast.makeText(context, "Ticket Cancelled", Toast.LENGTH_SHORT).show();
+                                                    context.startActivity(new Intent(context, Dashboard.class));
                                                 }
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {

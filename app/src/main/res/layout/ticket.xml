@@ -16,6 +16,13 @@
         android:layout_height="160dp"
         android:background="@color/cream">
 
+        <Button
+            android:id="@+id/cnclButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Cancel" />
+
         <ImageView
             android:id="@+id/posterTiket"
             android:layout_width="110dp"
@@ -46,17 +53,6 @@
             android:layout_marginTop="37dp"
             android:textStyle="bold"
             android:layout_toRightOf="@+id/posterTiket"/>
- <!--       <TextView
-            android:id="@+id/TotSeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total Seat"
-            android:layout_centerVertical="true"
-            android:layout_below="@+id/namaBioskop"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="10dp"
-            android:textStyle="bold"
-            android:layout_toRightOf="@+id/posterTiket"/> -->
         <TextView
             android:id="@+id/waktu"
             android:layout_width="wrap_content"
@@ -68,6 +64,23 @@
             android:paddingBottom="10dp"
             android:layout_below="@+id/namaBioskop"
             android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/jmlSeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@id/textView3"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="8dp"
+            android:text=" Kursi Dipesan" />
 
 
     </RelativeLayout>
