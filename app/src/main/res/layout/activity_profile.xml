@@ -144,6 +144,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="40dp"
             android:fontFamily="@font/nunito_black"
+            android:background="@color/brown2"
             android:text="Save" />
 
     </LinearLayout>
