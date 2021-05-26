@@ -93,11 +93,10 @@ public class InputDetActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         return true;
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+    public void onBackPressed() { super.onBackPressed();overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right); }
 }
