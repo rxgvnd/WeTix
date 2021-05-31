@@ -41,7 +41,7 @@
             <EditText
                 android:id="@+id/txEmailReg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:hint="Email"
                 android:fontFamily="@font/nunito_black"
                 android:inputType="textEmailAddress"
@@ -50,8 +50,8 @@
             <EditText
                 android:id="@+id/txUsernameReg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
                 android:hint="Your Name"
                 android:fontFamily="@font/nunito_black"
                 android:inputType="textPersonName"
@@ -60,7 +60,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="38dp"
+                android:layout_marginTop="30dp"
                 android:layout_weight="43"
                 android:orientation="horizontal">
 
@@ -71,25 +71,25 @@
                     android:text="Birthday: "
                     android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/tv_dateresult"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
                 <ImageButton
                     android:id="@+id/bt_datepicker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:background="#00FFFFFF"
                     android:src="@drawable/calendar" />
 
+                <TextView
+                    android:id="@+id/tv_dateresult"
+                    android:text="DD/MM/YYY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <EditText
                 android:id="@+id/txPasswordReg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
                 android:hint="Password"
                 android:fontFamily="@font/nunito_black"
                 android:inputType="textPassword"
@@ -98,8 +98,8 @@
             <EditText
                 android:id="@+id/txConPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/nunito_black"
                 android:hint="Confirm Password"
                 android:inputType="textPassword" />
@@ -107,29 +107,32 @@
 
         <LinearLayout
             android:id="@+id/ll_Register"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginLeft="100dp"
-            android:layout_marginRight="100dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="100dp">
+
             <Button
-                android:text="Register"
-                android:fontFamily="@font/nunito_black"
                 android:id="@+id/btnRegister"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/buttonstyle"/>
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:background="@drawable/buttonstyle"
+                android:fontFamily="@font/nunito_black"
+                android:text="Register" />
         </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/regToLog"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/nunito_black"
+            android:text="Back To Login"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:text="Back To Login"/>
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>
