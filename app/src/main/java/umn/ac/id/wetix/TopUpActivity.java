@@ -34,7 +34,7 @@ public class TopUpActivity extends AppCompatActivity {
 
     ImageButton toProfile;
     ImageView profpic;
-    TextView txEmail, txBalance, txBday, etName;
+    TextView txEmail, txBalance, etName;
     EditText etAmt;
     Button topUp;
     FirebaseAuth fAuth;
@@ -90,8 +90,8 @@ public class TopUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String uang = etAmt.getText().toString();
                 updateBalance = updateBalance + Long.parseLong(uang);
-                if(uang.isEmpty()){
-                    etAmt.setError("Masukkin angka boss");
+                if(TextUtils.isEmpty(uang)){
+                    etAmt.setError("Email is Required.");
                     return;
                 }
                 refSaldo.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(updateBalance).addOnCompleteListener(new OnCompleteListener<Void>() {

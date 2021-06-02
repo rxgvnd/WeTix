@@ -56,7 +56,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         enableMyLocation();
         String from = getIntent().getExtras().get("fromAct").toString();
 //        Log.d("test",from);
-        if(from.equals("TheatreFragment")){
+        if(from.equals("click")){
             double lati = Double.parseDouble(getIntent().getExtras().get("lat").toString());
             double longi = Double.parseDouble(getIntent().getExtras().get("long").toString());
             LatLng now = new LatLng(lati, longi);

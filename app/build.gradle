@@ -4,6 +4,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\java\\bin\\android.jks')
+            storePassword 'wetix123'
+            keyAlias 'business'
+            keyPassword 'wetix123'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 

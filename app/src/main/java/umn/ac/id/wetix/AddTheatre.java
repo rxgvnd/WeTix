@@ -62,6 +62,7 @@ public class AddTheatre {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (context, MapsActivity.class);
+                intent.putExtra("fromAct", "add");
                 context.startActivity(intent);
             }
         });

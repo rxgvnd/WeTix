@@ -61,7 +61,7 @@ public class TheatreAdapter extends FirebaseRecyclerAdapter<TheatreHelper, Theat
                 intent.putExtra("name", model.getItsName());
                 intent.putExtra("lat", model.getLatitude());
                 intent.putExtra("long", model. getLongitude());
-                intent.putExtra("fromAct", "TheatreFragment");
+                intent.putExtra("fromAct", "click");
                 context.startActivity(intent);
             }
         });
